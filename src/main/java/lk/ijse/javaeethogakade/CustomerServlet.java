@@ -35,6 +35,8 @@ public class CustomerServlet extends HttpServlet {
 
             stm.executeUpdate();
 
+            response.getWriter().println("Customer has been saved successfully");
+
 
         }catch (SQLException | ClassNotFoundException e){
 
