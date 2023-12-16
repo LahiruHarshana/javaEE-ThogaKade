@@ -33,6 +33,8 @@ public class CustomerServlet extends HttpServlet {
             stm.setString(3, address);
             stm.setDouble(4, salary);
 
+            stm.executeUpdate();
+
 
         }catch (SQLException | ClassNotFoundException e){
 
