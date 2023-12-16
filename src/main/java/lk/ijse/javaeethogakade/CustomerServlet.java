@@ -28,6 +28,9 @@ public class CustomerServlet extends HttpServlet {
             connection = DBConnection.getDbConnection().getConnection();
             PreparedStatement stm = connection.prepareStatement("INSERT INTO customer (cusID, cusName, cusAddress,cusSalary) VALUES (?, ?, ?,?)");
 
+            stm.setString(1, id);
+
+
         }catch (SQLException | ClassNotFoundException e){
 
         }
