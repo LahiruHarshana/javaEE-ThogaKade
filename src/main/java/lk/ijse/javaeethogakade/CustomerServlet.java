@@ -23,7 +23,7 @@ public class CustomerServlet extends HttpServlet {
             String id = request.getParameter("cusID");
             String name = request.getParameter("cusName");
             String address = request.getParameter("cusAddress");
-            String salary = request.getParameter("cusSalary");
+            Double salary = Double.valueOf(request.getParameter("cusSalary"));
 
             connection = DBConnection.getDbConnection().getConnection();
             PreparedStatement stm = connection.prepareStatement("INSERT INTO customer (cusID, cusName, cusAddress,cusSalary) VALUES (?, ?, ?,?)");
@@ -31,6 +31,7 @@ public class CustomerServlet extends HttpServlet {
             stm.setString(1, id);
             stm.setString(2, name);
             stm.setString(3, address);
+            stm.setDouble(4, salary);
 
 
         }catch (SQLException | ClassNotFoundException e){
