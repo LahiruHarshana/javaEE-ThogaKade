@@ -12,7 +12,12 @@ public class CustomerServlet extends HttpServlet {
         message = "Hello World!";
     }
 
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+    }
+
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        // Handle GET request logic here
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         out.println("<html><body>");
