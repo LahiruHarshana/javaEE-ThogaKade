@@ -30,6 +30,7 @@ public class CustomerServlet extends HttpServlet {
 
             stm.setString(1, id);
             stm.setString(2, name);
+            stm.setString(3, address);
 
 
         }catch (SQLException | ClassNotFoundException e){
