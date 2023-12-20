@@ -43,6 +43,7 @@ public class CustomerServlet extends HttpServlet {
         }
     }
 
+    @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         // Handle GET request logic here
         response.setContentType("text/html");
@@ -50,5 +51,9 @@ public class CustomerServlet extends HttpServlet {
         out.println("<html><body>");
         out.println("<h1>" + message + "</h1>");
         out.println("</body></html>");
+    }
+
+    public void doPut(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        // Handle PUT request logic here
     }
 }
