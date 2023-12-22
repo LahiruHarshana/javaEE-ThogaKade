@@ -56,6 +56,5 @@ public class CustomerServlet extends HttpServlet {
 
     @Override
     public void doPut(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        // Handle PUT request logic here`
     }
 }
