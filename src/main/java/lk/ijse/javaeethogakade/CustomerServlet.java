@@ -6,8 +6,8 @@ import java.io.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
+import jakarta.servlet.http.*;
+import jakarta.servlet.annotation.*;
 
 @WebServlet(name = "customerServlet", value = "/customer")
 public class CustomerServlet extends HttpServlet {
