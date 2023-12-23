@@ -42,7 +42,6 @@ var $cSalaryText = $("#cSalaryText");
 
 
 $("#cSavebtn").click(() => {
-
 let newCustomer = Object.assign({},customer);
 newCustomer.id = $cIdTxt.val();
 newCustomer.name = $cNameTxt.val();
