@@ -1,4 +1,3 @@
-
 var customerFormVar =document.querySelector("#customerForm");
 var itemFormVar =document.querySelector("#itemForm");
 var orderrFormVar =document.querySelector("#orderForm");
