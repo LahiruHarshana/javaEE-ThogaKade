@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import lk.ijse.javaeethogakade.dto.CustomerDto;
 
 @WebServlet(name = "customerServlet", value = "/customer")
 public class CustomerServlet extends HttpServlet {
