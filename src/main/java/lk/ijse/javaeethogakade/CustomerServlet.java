@@ -46,7 +46,6 @@ public class CustomerServlet extends HttpServlet {
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        // Handle GET request logic here
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         out.println("<html><body>");
