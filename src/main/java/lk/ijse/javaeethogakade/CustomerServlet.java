@@ -23,8 +23,6 @@ public class CustomerServlet extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Connection connection = null;
         try {
-
-
             BufferedReader reader = request.getReader();
             StringBuilder jsonInput = new StringBuilder();
 

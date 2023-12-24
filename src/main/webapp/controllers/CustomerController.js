@@ -134,17 +134,18 @@ $("#cSearchBtn").click(function () {
 
 
 
-function saveCustomer(){
-    let newCustomer = Object.assign({},customer);
-    newCustomer.id = $cIdTxt.val();
-    newCustomer.name = $cNameTxt.val();
-    newCustomer.address = $cAddressTxt.val();
-    newCustomer.salary = $cSalaryText.val();
+function saveCustomer() {
+    let newCustomer = {
+        id: $cIdTxt.val(),
+        name: $cNameTxt.val(),
+        address: $cAddressTxt.val(),
+        salary: $cSalaryText.val()
+    };
 
     $.ajax({
         type: "POST",
         url: "http://localhost:8080/pos/api/v1/customer",
-        contentType: JSON.stringify(newCustomer),
+        contentType: "application/json", // Corrected content type
         data: JSON.stringify(newCustomer),
         success: function (resp) {
             alert("Customer Saved");
@@ -152,8 +153,8 @@ function saveCustomer(){
         error: function (resp) {
             alert("Failed to save the customer");
         }
-    })
-
+    });
 }
+
 
 export default Customers;
