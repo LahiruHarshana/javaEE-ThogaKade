@@ -157,6 +157,7 @@ function saveCustomer(){
             alert("Customer Saved");
         },
         error: function (resp) {
+            alert("Failed to save the customer");
         }
 
 
