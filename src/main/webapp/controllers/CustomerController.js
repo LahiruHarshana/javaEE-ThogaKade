@@ -143,7 +143,7 @@ $("#cSearchBtn").click(function () {
 
 function saveCustomer(){
     var newCustomer = Object.assign({},customer);
-
+newCustomer.id = $cIdTxt.val();
 }
 
 export default Customers;
