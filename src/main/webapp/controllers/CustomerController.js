@@ -154,7 +154,6 @@ function saveCustomer(){
         contentType: JSON.stringify(newCustomer),
         data: JSON.stringify(newCustomer),
         success: function (resp) {
-            alert("Customer Saved");
         }
 
 
