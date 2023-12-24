@@ -154,5 +154,3 @@ function saveCustomer(){
         }
     })
 }
-
-export default Customers;
