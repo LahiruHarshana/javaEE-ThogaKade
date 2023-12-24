@@ -24,6 +24,7 @@ public class CustomerServlet extends HttpServlet {
 
 
             BufferedReader reader = request.getReader();
+            String[] split = reader.readLine().split("&");
 
 
             connection = DBConnection.getDbConnection().getConnection();
