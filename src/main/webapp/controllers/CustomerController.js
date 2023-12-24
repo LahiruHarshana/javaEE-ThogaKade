@@ -149,6 +149,9 @@ function saveCustomer(){
     newCustomer.salary = $cSalaryText.val();
 
     $.ajax({
+        type: "POST",
+        url: "http://localhost:8080/pos/api/v1/customer",
+        data: JSON.stringify(newCustomer),
 
 
 
