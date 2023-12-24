@@ -21,10 +21,6 @@ public class CustomerServlet extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Connection connection = null;
         try {
-            String id = request.getParameter("cusID");
-            String name = request.getParameter("cusName");
-            String address = request.getParameter("cusAddress");
-            Double salary = Double.valueOf(request.getParameter("cusSalary"));
 
             connection = DBConnection.getDbConnection().getConnection();
             PreparedStatement stm = connection.prepareStatement("INSERT INTO customer (cusID, cusName, cusAddress,cusSalary) VALUES (?, ?, ?,?)");
