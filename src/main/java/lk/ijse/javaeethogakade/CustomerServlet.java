@@ -22,6 +22,10 @@ public class CustomerServlet extends HttpServlet {
         Connection connection = null;
         try {
 
+
+            BufferedReader reader = request.getReader();
+
+
             connection = DBConnection.getDbConnection().getConnection();
             PreparedStatement stm = connection.prepareStatement("INSERT INTO customer (cusID, cusName, cusAddress,cusSalary) VALUES (?, ?, ?,?)");
 
