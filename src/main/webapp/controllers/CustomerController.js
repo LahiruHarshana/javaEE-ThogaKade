@@ -42,14 +42,6 @@ var $cSalaryText = $("#cSalaryText");
 
 
 $("#cSavebtn").click(() => {
-let newCustomer = Object.assign({},customer);
-newCustomer.id = $cIdTxt.val();
-newCustomer.name = $cNameTxt.val();
-newCustomer.address = $cAddressTxt.val();
-newCustomer.salary = $cSalaryText.val();
-customers.push(newCustomer);
-    customers.push(customer);
-    updateCustomerTable();
 });
 
 $tblCustomer.on("dblclick", "tr", function () {
@@ -159,9 +151,6 @@ function saveCustomer(){
         error: function (resp) {
             alert("Failed to save the customer");
         }
-
-
-
     })
 
 }
