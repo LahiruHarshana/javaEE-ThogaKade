@@ -44,7 +44,7 @@ public class CustomerServlet extends HttpServlet {
             stm.setString(1, customerDto.getId());
             stm.setString(2, customerDto.getName());
             stm.setString(3, customerDto.getAddress());
-            stm.setDouble(4, salary);
+            stm.setDouble(4, customerDto.getSalary());
 
             stm.executeUpdate();
 
