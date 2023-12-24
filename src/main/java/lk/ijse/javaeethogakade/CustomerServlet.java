@@ -32,8 +32,6 @@ public class CustomerServlet extends HttpServlet {
                 jsonInput.append(line);
             }
 
-            ObjectMapper objectMapper = new ObjectMapper();
-
             connection = DBConnection.getDbConnection().getConnection();
             PreparedStatement stm = connection.prepareStatement("INSERT INTO customer (cusID, cusName, cusAddress,cusSalary) VALUES (?, ?, ?,?)");
 
