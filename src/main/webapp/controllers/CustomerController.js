@@ -155,6 +155,9 @@ function saveCustomer(){
         data: JSON.stringify(newCustomer),
         success: function (resp) {
             alert("Customer Saved");
+        },
+        error: function (resp) {
+            alert("Failed to save the customer");
         }
 
 
