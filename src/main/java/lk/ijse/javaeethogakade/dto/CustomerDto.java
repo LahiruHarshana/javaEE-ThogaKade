@@ -5,5 +5,8 @@ public class CustomerDto {
         private String name;
         private String address;
         private double salary;
+
+    public CustomerDto() {
+    }
 }
 
