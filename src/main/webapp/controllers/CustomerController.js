@@ -139,4 +139,11 @@ $("#cSearchBtn").click(function () {
     }
 });
 
+
+
+function saveCustomer(){
+    var newCustomer = Object.assign({},customer);
+
+}
+
 export default Customers;
