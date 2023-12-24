@@ -148,6 +148,12 @@ function saveCustomer(){
     newCustomer.address = $cAddressTxt.val();
     newCustomer.salary = $cSalaryText.val();
 
+    $.ajax({
+
+
+
+    })
+
 }
 
 export default Customers;
