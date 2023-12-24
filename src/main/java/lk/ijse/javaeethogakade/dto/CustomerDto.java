@@ -1,6 +1,8 @@
 package lk.ijse.javaeethogakade.dto;
 
-public class CustomerDto {
+import java.io.Serializable;
+
+public class CustomerDto implements Serializable {
         private String id;
         private String name;
         private String address;
