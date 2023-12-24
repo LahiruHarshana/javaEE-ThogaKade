@@ -1,5 +1,6 @@
 package lk.ijse.javaeethogakade;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lk.ijse.javaeethogakade.db.DBConnection;
 
 import java.io.*;
@@ -31,6 +32,9 @@ public class CustomerServlet extends HttpServlet {
             while ((line = reader.readLine())!=null){
                 jsonInput.append(line);
             }
+
+
+            ObjectMapper objectMapper = new ObjectMapper();
 
             connection = DBConnection.getDbConnection().getConnection();
             PreparedStatement stm = connection.prepareStatement("INSERT INTO customer (cusID, cusName, cusAddress,cusSalary) VALUES (?, ?, ?,?)");
