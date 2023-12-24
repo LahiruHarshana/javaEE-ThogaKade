@@ -153,6 +153,9 @@ function saveCustomer(){
         url: "http://localhost:8080/pos/api/v1/customer",
         contentType: JSON.stringify(newCustomer),
         data: JSON.stringify(newCustomer),
+        success: function (resp) {
+            alert("Customer Saved");
+        }
 
 
 
