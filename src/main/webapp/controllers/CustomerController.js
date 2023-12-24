@@ -42,6 +42,7 @@ var $cSalaryText = $("#cSalaryText");
 
 
 $("#cSavebtn").click(() => {
+    saveCustomer();
 });
 
 $tblCustomer.on("dblclick", "tr", function () {
