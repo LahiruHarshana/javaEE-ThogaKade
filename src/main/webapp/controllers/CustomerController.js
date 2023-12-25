@@ -132,8 +132,6 @@ $("#cSearchBtn").click(function () {
     }
 });
 
-
-
 function saveCustomer(){
     let newCustomer = Object.assign({},customer);
     newCustomer.id = $cIdTxt.val();
