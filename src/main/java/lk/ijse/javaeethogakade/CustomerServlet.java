@@ -87,6 +87,8 @@ public class CustomerServlet extends HttpServlet {
             stm.setString(2, customerDto.getAddress());
             stm.setDouble(3, customerDto.getSalary());
             stm.setString(4, customerDto.getId());
+
+            stm.executeUpdate();
     } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
