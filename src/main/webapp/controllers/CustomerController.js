@@ -153,6 +153,6 @@ function saveCustomer(){
     })
 }
 
-updateCustomer(){
+function updateCustomer(){
 
 }
