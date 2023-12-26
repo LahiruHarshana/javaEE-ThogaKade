@@ -152,3 +152,7 @@ function saveCustomer(){
         }
     })
 }
+
+updateCustomer(){
+
+}
