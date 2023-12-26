@@ -160,4 +160,17 @@ function updateCustomer(){
     newCustomer.address = $cAddressTxt.val();
     newCustomer.salary = $cSalaryText.val();
 
+    $.ajax({
+        type: "PUT",
+        url: "http://localhost:8080/app/customer",
+        contentType: JSON.stringify(newCustomer),
+        data: JSON.stringify(newCustomer),
+        success: function (resp) {
+            alert("Customer Updated");
+        },
+        error: function (resp) {
+            alert("Failed to update the customer");
+        }
+    })
+
 }
