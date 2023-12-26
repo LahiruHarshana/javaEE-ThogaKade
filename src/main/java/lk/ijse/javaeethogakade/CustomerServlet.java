@@ -65,6 +65,15 @@ public class CustomerServlet extends HttpServlet {
 
     @Override
     public void doPut(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        Connection connection = null;
+        try {
+            BufferedReader reader = request.getReader();
+            StringBuilder jsonInput = new StringBuilder();
 
+            String line = null;
+
+            while ((line = reader.readLine())!=null){
+                jsonInput.append(line);
+            }
     }
 }
