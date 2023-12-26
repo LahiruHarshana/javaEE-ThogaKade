@@ -28,7 +28,7 @@ public class CustomerServlet extends HttpServlet {
 
             String line = null;
 
-            while ((line = reader.readLine())!=null){
+            while ((line = reader.readLine()) != null) {
                 jsonInput.append(line);
             }
 
@@ -49,7 +49,7 @@ public class CustomerServlet extends HttpServlet {
             response.getWriter().println("Customer has been saved successfully");
 
 
-        }catch (SQLException | ClassNotFoundException e){
+        } catch (SQLException | ClassNotFoundException e) {
 
         }
     }
@@ -72,7 +72,7 @@ public class CustomerServlet extends HttpServlet {
 
             String line = null;
 
-            while ((line = reader.readLine())!=null){
+            while ((line = reader.readLine()) != null) {
                 jsonInput.append(line);
             }
 
@@ -91,9 +91,11 @@ public class CustomerServlet extends HttpServlet {
             stm.executeUpdate();
 
             response.getWriter().println("Customer has been updated successfully");
-    } catch (SQLException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
+
+}
