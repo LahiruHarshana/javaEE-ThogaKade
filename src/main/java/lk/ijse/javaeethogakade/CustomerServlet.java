@@ -78,5 +78,6 @@ public class CustomerServlet extends HttpServlet {
 
 
             ObjectMapper objectMapper = new ObjectMapper();
+            CustomerDto customerDto = objectMapper.readValue(jsonInput.toString(), CustomerDto.class);
     }
 }
