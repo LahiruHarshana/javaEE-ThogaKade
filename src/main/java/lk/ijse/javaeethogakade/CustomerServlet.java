@@ -89,6 +89,8 @@ public class CustomerServlet extends HttpServlet {
             stm.setString(4, customerDto.getId());
 
             stm.executeUpdate();
+
+            response.getWriter().println("Customer has been updated successfully");
     } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
