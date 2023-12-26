@@ -75,5 +75,8 @@ public class CustomerServlet extends HttpServlet {
             while ((line = reader.readLine())!=null){
                 jsonInput.append(line);
             }
+
+
+            ObjectMapper objectMapper = new ObjectMapper();
     }
 }
