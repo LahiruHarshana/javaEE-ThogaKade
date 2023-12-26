@@ -154,5 +154,10 @@ function saveCustomer(){
 }
 
 function updateCustomer(){
+    let newCustomer = Object.assign({},customer);
+    newCustomer.id = $cIdTxt.val();
+    newCustomer.name = $cNameTxt.val();
+    newCustomer.address = $cAddressTxt.val();
+    newCustomer.salary = $cSalaryText.val();
 
 }
