@@ -82,6 +82,8 @@ public class CustomerServlet extends HttpServlet {
 
             connection = DBConnection.getDbConnection().getConnection();
             PreparedStatement stm = connection.prepareStatement("UPDATE customer SET cusName=?, cusAddress=?, cusSalary=? WHERE cusID=?");
+
+            stm.setString(1, customerDto.getName());
     } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
