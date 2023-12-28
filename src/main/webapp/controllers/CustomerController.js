@@ -3,7 +3,6 @@ var itemFormVar =document.querySelector("#itemForm");
 var orderrFormVar =document.querySelector("#orderForm");
 var homeFormVar = document.querySelector("#homeeeeee");
 
-
 homeFormVar.style.display='inline'
 customerFormVar.style.display='none';
 itemFormVar.style.display='none';
