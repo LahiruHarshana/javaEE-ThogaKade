@@ -155,5 +155,4 @@ function updateCustomer(){
             alert("Failed to update the customer");
         }
     })
-
 }
