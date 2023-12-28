@@ -155,6 +155,6 @@ function updateCustomer(){
     })
 }
 
-deletCustomer(){
+function deletCustomer(){
 
 }
