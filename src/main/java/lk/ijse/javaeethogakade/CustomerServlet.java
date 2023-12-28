@@ -65,6 +65,7 @@ public class CustomerServlet extends HttpServlet {
 
     @Override
     public void doPut(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.getWriter().println("Customer has been updated successfully");
         Connection connection = null;
         try {
             BufferedReader reader = request.getReader();
