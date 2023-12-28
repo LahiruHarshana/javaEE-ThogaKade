@@ -154,3 +154,7 @@ function updateCustomer(){
         }
     })
 }
+
+deletCustomer(){
+
+}
