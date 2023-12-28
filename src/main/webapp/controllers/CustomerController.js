@@ -156,5 +156,23 @@ function updateCustomer(){
 }
 
 function deletCustomer(){
+    let newCustomer = Object.assign({},customer);
+    newCustomer.id = $cIdTxt.val();
+    newCustomer.name = $cNameTxt.val();
+    newCustomer.address = $cAddressTxt.val();
+    newCustomer.salary = $cSalaryText.val();
+
+    $.ajax({
+        type: "DELETE",
+        url: "http://localhost:8080/app/customer",
+        contentType: JSON.stringify(newCustomer),
+        data: JSON.stringify(newCustomer),
+        success: function (resp) {
+            alert("Customer Deleted");
+        },
+        error: function (resp) {
+            alert("Failed to delete the customer");
+        }
+    })
 
 }
