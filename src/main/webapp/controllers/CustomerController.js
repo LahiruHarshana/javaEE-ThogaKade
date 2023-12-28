@@ -174,5 +174,4 @@ function deletCustomer(){
             alert("Failed to delete the customer");
         }
     })
-
 }
