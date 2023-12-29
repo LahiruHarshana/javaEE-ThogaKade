@@ -185,3 +185,6 @@ function deleteCustomer() {
     });
 
 }
+
+export { saveCustomer, updateCustomer };
+

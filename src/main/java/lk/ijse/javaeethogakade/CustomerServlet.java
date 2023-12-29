@@ -58,7 +58,6 @@ public class CustomerServlet extends HttpServlet {
 
         }
     }
-
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("application/json");
@@ -91,12 +90,14 @@ public class CustomerServlet extends HttpServlet {
                 }
             }
         }
+
         ObjectMapper objectMapper = new ObjectMapper();
         String json = objectMapper.writeValueAsString(customers);
 
         PrintWriter out = response.getWriter();
         out.println(json);
     }
+
 
     @Override
     public void doPut(HttpServletRequest request, HttpServletResponse response) throws IOException {
