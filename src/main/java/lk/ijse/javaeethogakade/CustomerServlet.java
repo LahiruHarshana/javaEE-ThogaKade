@@ -108,6 +108,10 @@ public class CustomerServlet extends HttpServlet {
             StringBuilder jsonInput = new StringBuilder();
 
             String line = null;
+
+            while ((line = reader.readLine()) != null) {
+                jsonInput.append(line);
+            }
             connection = DBConnection.getDbConnection().getConnection();
         } catch (Exception e) {
             throw new RuntimeException(e);
