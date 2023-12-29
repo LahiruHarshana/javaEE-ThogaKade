@@ -1,6 +1,7 @@
 package lk.ijse.javaeethogakade;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.servlet.ServletException;
 import lk.ijse.javaeethogakade.db.DBConnection;
 
 import java.io.*;
@@ -95,6 +96,15 @@ public class CustomerServlet extends HttpServlet {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        try {
+
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
