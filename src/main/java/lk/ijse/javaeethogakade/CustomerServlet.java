@@ -100,21 +100,35 @@ public class CustomerServlet extends HttpServlet {
     }
 
     @Override
-    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Connection connection = null;
-
         try {
-            BufferedReader reader = req.getReader();
-            StringBuilder jsonInput = new StringBuilder();
+            String customerId = request.getParameter("cusID"); // Assuming cusID is the parameter for the customer ID
 
-            String line = null;
-
-            while ((line = reader.readLine()) != null) {
-                jsonInput.append(line);
-            }
             connection = DBConnection.getDbConnection().getConnection();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+            PreparedStatement stm = connection.prepareStatement("DELETE FROM customer WHERE cusID=?");
+
+            stm.setString(1, customerId);
+
+            int affectedRows = stm.executeUpdate();
+
+            if (affectedRows > 0) {
+                response.getWriter().println("Customer has been deleted successfully");
+            } else {
+                response.getWriter().println("Customer not found or could not be deleted");
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new ServletException("Error in doDelete method", e);
+        } finally {
+            // Close the connection if needed
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
+
 }
