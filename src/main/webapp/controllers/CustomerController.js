@@ -103,6 +103,7 @@ $("#clearBtn").click(() => {
 
 $("#cDeleteBtn").click(() => {
     deleteCustomer();
+    updateCustomerTable();
 });
 
 $("#cSearchBtn").click(function () {
