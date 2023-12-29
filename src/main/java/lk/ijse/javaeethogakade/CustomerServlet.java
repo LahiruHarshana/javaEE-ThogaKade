@@ -91,7 +91,6 @@ public class CustomerServlet extends HttpServlet {
                 }
             }
         }
-
         ObjectMapper objectMapper = new ObjectMapper();
         String json = objectMapper.writeValueAsString(customers);
 
