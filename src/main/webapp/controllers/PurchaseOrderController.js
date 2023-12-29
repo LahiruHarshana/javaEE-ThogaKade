@@ -1,5 +1,4 @@
-import Customers from './CustomerController.js';
-import Items from "./ItemController.js";
+
 import { validated1, validated2, validated3, validated4, validated5, validated6, validated7, validated8, validated9, validated10, validated11 } from "./validations/OrderValidation.js";
 
 
