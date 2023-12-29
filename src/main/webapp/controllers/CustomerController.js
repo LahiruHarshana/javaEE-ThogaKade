@@ -163,7 +163,6 @@ function deleteCustomer() {
         url: `http://localhost:8080/app/customer/${customerId}`,
         success: function (resp) {
             alert("Customer Deleted");
-            // You might want to clear the form or update the table after a successful delete
             clearForm();
             updateCustomerTable();
         },
