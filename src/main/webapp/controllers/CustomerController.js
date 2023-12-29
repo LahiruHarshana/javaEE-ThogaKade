@@ -52,6 +52,8 @@ $tblCustomer.on("dblclick", "tr", function () {
 
 $("#cUpdateBtn").click(() => {
     updateCustomer();
+    updateCustomerTable();
+
 });
 
 function updateCustomerTable() {
