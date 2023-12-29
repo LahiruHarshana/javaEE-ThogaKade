@@ -192,6 +192,3 @@ function deleteCustomer() {
     });
 
 }
-
-function getAll(){
-}
