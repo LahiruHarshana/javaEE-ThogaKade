@@ -172,3 +172,7 @@ function deleteCustomer() {
     });
 
 }
+
+function getAll(){
+
+}
