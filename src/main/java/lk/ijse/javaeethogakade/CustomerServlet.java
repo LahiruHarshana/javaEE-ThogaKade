@@ -7,7 +7,11 @@ import lk.ijse.javaeethogakade.db.DBConnection;
 import java.io.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import lk.ijse.javaeethogakade.dto.CustomerDto;
@@ -57,11 +61,42 @@ public class CustomerServlet extends HttpServlet {
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.setContentType("text/html");
+        response.setContentType("application/json");
+
+        List<CustomerDto> customers = new ArrayList<>();
+        Connection connection = null;
+
+        try {
+            connection = DBConnection.getDbConnection().getConnection();
+            PreparedStatement stm = connection.prepareStatement("SELECT * FROM customer");
+            ResultSet resultSet = stm.executeQuery();
+
+            while (resultSet.next()) {
+                CustomerDto customer = new CustomerDto(
+                        resultSet.getString("cusID"),
+                        resultSet.getString("cusName"),
+                        resultSet.getString("cusAddress"),
+                        resultSet.getDouble("cusSalary")
+                );
+                customers.add(customer);
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        String json = objectMapper.writeValueAsString(customers);
+
         PrintWriter out = response.getWriter();
-        out.println("<html><body>");
-        out.println("<h1>" + message + "</h1>");
-        out.println("</body></html>");
+        out.println(json);
     }
 
     @Override

@@ -54,6 +54,22 @@ $("#cUpdateBtn").click(() => {
 });
 
 function updateCustomerTable() {
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:8080/app/customer",
+        dataType: "json",
+        success: function (resp) {
+            customers = resp;
+            renderTable();
+        },
+        error: function (xhr, status, error) {
+            console.error("Failed to load the customers:", error);
+            alert("Failed to load the customers. Check the console for more details.");
+        }
+    });
+}
+
+function renderTable() {
     $tblCustomer.empty();
 
     customers.forEach((customer) => {
@@ -73,6 +89,7 @@ function updateCustomerTable() {
         $cSalaryText.val(salary);
     });
 }
+
 
 $("#clearBtn").click(() => {
     $cNameTxt.val("");
@@ -174,15 +191,4 @@ function deleteCustomer() {
 }
 
 function getAll(){
-$.ajax({
-        type: "GET",
-        url: "http://localhost:8080/app/customer",
-        success: function (resp) {
-            customers = resp;
-            updateCustomerTable();
-        },
-        error: function (resp) {
-            alert("Failed to load the customers");
-        }
-    });
 }
