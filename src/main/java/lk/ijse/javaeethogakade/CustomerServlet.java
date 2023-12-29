@@ -105,7 +105,7 @@ public class CustomerServlet extends HttpServlet {
         Connection connection = null;
 
         try {
-            connection = DBConnection.;
+            connection = DBConnection.getDbConnection().getConnection();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
