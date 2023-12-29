@@ -174,5 +174,15 @@ function deleteCustomer() {
 }
 
 function getAll(){
-
+$.ajax({
+        type: "GET",
+        url: "http://localhost:8080/app/customer",
+        success: function (resp) {
+            customers = resp;
+            updateCustomerTable();
+        },
+        error: function (resp) {
+            alert("Failed to load the customers");
+        }
+    });
 }
