@@ -103,7 +103,7 @@ public class CustomerServlet extends HttpServlet {
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Connection connection = null;
         try {
-            String customerId = request.getParameter("cusID"); // Assuming cusID is the parameter for the customer ID
+            String customerId = request.getParameter("cusID");
 
             connection = DBConnection.getDbConnection().getConnection();
             PreparedStatement stm = connection.prepareStatement("DELETE FROM customer WHERE cusID=?");
