@@ -105,6 +105,7 @@ public class CustomerServlet extends HttpServlet {
 
         try {
             BufferedReader reader = req.getReader();
+            StringBuilder jsonInput = new StringBuilder();
             connection = DBConnection.getDbConnection().getConnection();
         } catch (Exception e) {
             throw new RuntimeException(e);
