@@ -120,7 +120,6 @@ public class CustomerServlet extends HttpServlet {
         } catch (SQLException | ClassNotFoundException e) {
             throw new ServletException("Error in doDelete method", e);
         } finally {
-            // Close the connection if needed
             if (connection != null) {
                 try {
                     connection.close();
