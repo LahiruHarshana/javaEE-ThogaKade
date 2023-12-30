@@ -66,6 +66,9 @@ function updateCustomerTable(){
                 let row = `<tr><td>${id}</td><td>${name}</td><td>${address}</td><td>${salary}</td></tr>`;
                 $("#tblCustomer").append(row);
             }
+        },
+        error: function (resp) {
+            alert("Failed to load the customer");
         }
 
 
