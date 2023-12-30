@@ -44,12 +44,6 @@ $("#cSavebtn").click(() => {
     updateCustomerTable();
 });
 
-$tblCustomer.on("dblclick", "tr", function () {
-    const index = $(this).index();
-    Customers.splice(index, 1);
-    updateCustomerTable();
-});
-
 $("#cUpdateBtn").click(() => {
     updateCustomer();
     updateCustomerTable();
