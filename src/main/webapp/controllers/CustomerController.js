@@ -20,6 +20,7 @@ $("#customerNav").click(function (){
     customerFormVar.style.display='inline';
     itemFormVar.style.display='none';
     orderrFormVar.style.display='none';
+    updateCustomerTable();
 });
 
 
@@ -72,10 +73,6 @@ function updateCustomerTable(){
         }
     });
 }
-
-
-
-
 $("#clearBtn").click(() => {
     $cNameTxt.val("");
     $cIdTxt.val("");
