@@ -54,6 +54,9 @@ function updateCustomerTable(){
     $("#tblCustomer").empty();
 
     $.ajax({
+        type: "GET",
+        url: "http://localhost:8080/app/customer",
+
 
     })
 }
