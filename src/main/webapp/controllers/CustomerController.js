@@ -70,7 +70,7 @@ function updateCustomerTable(){
         error: function (resp) {
             alert("Failed to load the customer");
         }
-    })
+    });
 }
 
 
