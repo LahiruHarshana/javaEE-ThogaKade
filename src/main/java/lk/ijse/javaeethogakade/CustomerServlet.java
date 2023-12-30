@@ -3,6 +3,7 @@ package lk.ijse.javaeethogakade;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.json.Json;
 import jakarta.json.JsonArrayBuilder;
+import jakarta.json.JsonObjectBuilder;
 import jakarta.servlet.ServletException;
 import lk.ijse.javaeethogakade.db.DBConnection;
 
