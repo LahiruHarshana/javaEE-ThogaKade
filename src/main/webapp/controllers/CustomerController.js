@@ -56,6 +56,11 @@ $("#cUpdateBtn").click(() => {
 
 });
 
+function updateCustomer(){
+
+
+}
+
 
 
 
