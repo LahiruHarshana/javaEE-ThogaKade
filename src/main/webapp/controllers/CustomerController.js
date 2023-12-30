@@ -54,10 +54,13 @@ $("#cUpdateBtn").click(() => {
     updateCustomer();
     updateCustomerTable();
 
+    $.ajax()
 });
 
 function updateCustomerTable(){
     $("#tblCustomer").empty();
+
+
 }
 
 
