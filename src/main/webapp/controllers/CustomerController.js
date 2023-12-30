@@ -59,7 +59,7 @@ $("#cUpdateBtn").click(() => {
 function updateCustomerTable(){
     $("#tblCustomer").empty();
 
-
+    $.ajax()
 }
 
 
