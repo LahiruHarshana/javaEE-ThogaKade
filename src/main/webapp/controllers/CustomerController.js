@@ -56,7 +56,7 @@ $("#cUpdateBtn").click(() => {
 
 });
 
-function updateCustomer(){
+function updateCustomerTable(){
 
 
 }
