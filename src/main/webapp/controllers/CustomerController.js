@@ -56,42 +56,7 @@ $("#cUpdateBtn").click(() => {
 
 });
 
-function updateCustomerTable() {
-    $.ajax({
-        type: "GET",
-        url: "http://localhost:8080/app/customer",
-        dataType: "json",
-        success: function (resp) {
-            customers = resp;
-            renderTable();
-        },
-        error: function (xhr, status, error) {
-            console.error("Failed to load the customers:", error);
-            alert("Failed to load the customers. Check the console for more details.");
-        }
-    });
-}
 
-function renderTable() {
-    $tblCustomer.empty();
-
-    customers.forEach((customer) => {
-        $tblCustomer.append(`<tr><td>${customer.name}</td><td>${customer.id}</td><td>${customer.address}</td><td>${customer.salary}</td></tr>`);
-    });
-
-    $tblCustomer.find("tr").click(function () {
-        const row = $(this);
-        const name = row.find("td:eq(0)").text();
-        const id = row.find("td:eq(1)").text();
-        const address = row.find("td:eq(2)").text();
-        const salary = row.find("td:eq(3)").text();
-
-        $cNameTxt.val(name);
-        $cIdTxt.val(id);
-        $cAddressTxt.val(address);
-        $cSalaryText.val(salary);
-    });
-}
 
 
 $("#clearBtn").click(() => {
