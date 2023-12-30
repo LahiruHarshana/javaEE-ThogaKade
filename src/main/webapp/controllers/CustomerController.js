@@ -57,7 +57,7 @@ function updateCustomerTable(){
         type: "GET",
         url: "http://localhost:8080/app/customer",
         success: function (customers) {
-            for(let i in )
+            for(let i in customers){
         },
 
 
