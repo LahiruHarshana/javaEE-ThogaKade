@@ -64,7 +64,8 @@ public class CustomerServlet extends HttpServlet {
         Connection connection = null;
         try {
             connection = DBConnection.getDbConnection().getConnection();
-            PreparedStatement pstm = connection.prepareStatement("select * from Customer");
+
+            PreparedStatement pstm = connection.prepareStatement("select * from customer");
             ResultSet rst = pstm.executeQuery();
             PrintWriter writer = resp.getWriter();
             resp.addHeader("Content-Type", "application/json");
