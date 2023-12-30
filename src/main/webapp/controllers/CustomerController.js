@@ -58,7 +58,13 @@ function updateCustomerTable(){
         url: "http://localhost:8080/app/customer",
         success: function (customers) {
             for(let i in customers){
+                let id = customers[i].id;
+                let name = customers[i].name;
+                let address = customers[i].address;
+                let salary = customers[i].salary;
 
+                let row = `<tr><td>${id}</td><td>${name}</td><td>${address}</td><td>${salary}</td></tr>`;
+                $("#tblCustomer").append(row);
             }
         }
 
