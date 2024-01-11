@@ -6,6 +6,7 @@ import lk.ijse.javaeethogakade.db.DBConnection;
 import java.io.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import jakarta.servlet.http.*;
@@ -20,7 +21,8 @@ public class ItemServlet extends HttpServlet {
         Connection connection = null;
         try {
             connection = DBConnection.getDbConnection().getConnection();
-            PreparedStatement stm = connection.prepareStatement("INSERT INTO item (code, description, unitPrice,qtyOnHand) VALUES (?, ?, ?,?)");
+            PreparedStatement stm = connection.prepareStatement("SELECT * FROM item");
+            ResultSet rst = stm.executeQuery();
 
 
         } catch (SQLException e) {
