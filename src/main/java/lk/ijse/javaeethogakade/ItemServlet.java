@@ -24,7 +24,7 @@ public class ItemServlet extends HttpServlet {
             PreparedStatement stm = connection.prepareStatement("SELECT * FROM item");
             ResultSet rst = stm.executeQuery();
             resp.addHeader("Content-Type","application/json");
-            resp
+            resp.addHeader("Access-Control-Allow-Origin","*");
 
 
         } catch (SQLException e) {
