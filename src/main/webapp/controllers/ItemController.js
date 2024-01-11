@@ -136,4 +136,28 @@ $("#iSearchBtn").click(function () {
     }
 });
 
+
+function saveItem() {
+    var item = {
+        id: $("#iID").val(),
+        name: $("#IIName").val(),
+        price: $("#i-Price").val(),
+        Qty: $("#Iqty").val(),
+    };
+
+    $.ajax({
+        method: "POST",
+        url: "http://localhost:8080/app/item",
+        contentType: "application/json",
+        async: true,
+        data: JSON.stringify(item),
+        success: function (data) {
+            alert("Item has been saved successfully");
+        },
+        error: function (data) {
+            alert("Failed to save the item");
+        },
+    });
+}
+
 export default Items;
