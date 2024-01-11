@@ -16,10 +16,13 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import lk.ijse.javaeethogakade.dto.ItemDTO;
 
-@WebServlet(urlPatterns = "/item")
+@WebServlet(name = "itemServlet", value = "/item")
 public class ItemServlet extends HttpServlet {
+    private String message;
 
-
+    public void init() {
+        message = "Hello World!";
+    }
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Connection connection = null;
@@ -77,16 +80,10 @@ public class ItemServlet extends HttpServlet {
             stm.setObject(2, itemDTO.getDescription());
             stm.setObject(3, itemDTO.getUnitPrice());
             stm.setObject(4, itemDTO.getQtyOnHand());
-            int affectedRows = stm.executeUpdate();
+            stm.executeUpdate();
 
-            resp.addHeader("Content-Type", "application/json");
-            resp.addHeader("Access-Control-Allow-Origin", "*");
+            resp.getWriter().println("Customer has been saved successfully");
 
-            if (affectedRows > 0) {
-                resp.setStatus(HttpServletResponse.SC_CREATED);
-            } else {
-                resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            }
 
         } catch (ClassNotFoundException | SQLException e) {
             throw new RuntimeException(e);
