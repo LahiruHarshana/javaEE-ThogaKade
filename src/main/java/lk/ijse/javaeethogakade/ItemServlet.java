@@ -25,7 +25,7 @@ public class ItemServlet extends HttpServlet {
         Connection connection = null;
         try {
             connection = DBConnection.getDbConnection().getConnection();
-            PreparedStatement stm = connection.prepareStatement("SELECT * FROM item");
+            PreparedStatement stm = connection.prepareStatement("SELECT * FROM items");
             PrintWriter writer = resp.getWriter();
             ResultSet rst = stm.executeQuery();
             resp.addHeader("Content-Type","application/json");
