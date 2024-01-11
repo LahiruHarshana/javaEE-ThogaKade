@@ -38,14 +38,8 @@ var $iQty = $("#Iqty");
 
 
 $("#iSaveBtn").click(() => {
-    const item = {
-        id: $iIdTxt.val(),
-        name: $iNameTxt.val(),
-        price: $iPrice.val(),
-        Qty: $iQty.val(),
-    };
+    saveItem();
 
-    Items.push(item);
     updateItemTable();
 });
 
