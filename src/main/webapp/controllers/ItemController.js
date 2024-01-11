@@ -73,15 +73,8 @@ $("#iclearBtn").click(() => {
 });
 
 $("#iDeleteBtn").click(() => {
-    const iIdValue = $iIdTxt.val();
-
-    for (let i = 0; i < Items.length; i++) {
-        if (Items[i].id === iIdValue) {
-            Items.splice(i, 1);
-            updateItemTable();
-            break;
-        }
-    }
+    deleteItem();
+    updateItemTable();
 });
 
 $("#iSearchBtn").click(function () {
