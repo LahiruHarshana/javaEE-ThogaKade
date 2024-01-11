@@ -30,6 +30,20 @@ public class ItemServlet extends HttpServlet {
 
             JsonArrayBuilder allItem = Json.createArrayBuilder();
 
+            while (rst.next()){
+                String code = rst.getString(1);
+                String description = rst.getString(2);
+                double unitPrice = rst.getDouble(3);
+                int qtyOnHand = rst.getInt(4);
+
+                allItem.add(Json.createObjectBuilder()
+                        .add("code",code)
+                        .add("description",description)
+                        .add("unitPrice",unitPrice)
+                        .add("qtyOnHand",qtyOnHand)
+                        .build());
+            }
+
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
