@@ -1,5 +1,7 @@
 package lk.ijse.javaeethogakade;
 
+import jakarta.json.Json;
+import jakarta.json.JsonArrayBuilder;
 import jakarta.servlet.ServletException;
 import lk.ijse.javaeethogakade.db.DBConnection;
 
@@ -25,6 +27,8 @@ public class ItemServlet extends HttpServlet {
             ResultSet rst = stm.executeQuery();
             resp.addHeader("Content-Type","application/json");
             resp.addHeader("Access-Control-Allow-Origin","*");
+
+            JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
 
 
         } catch (SQLException e) {
