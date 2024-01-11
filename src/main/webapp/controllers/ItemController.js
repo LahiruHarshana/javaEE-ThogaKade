@@ -183,4 +183,21 @@ function updateItem() {
     });
 }
 
+function deleteItem() {
+    var itemId = $("#iID").val();
+
+    $.ajax({
+        method: "DELETE",
+        url: "http://localhost:8080/app/item?id=" + itemId,
+        contentType: "application/json",
+        async: true,
+        success: function (data) {
+            alert("Item has been deleted successfully");
+        },
+        error: function (data) {
+            alert("Failed to delete the item");
+        },
+    });
+}
+
 export default Items;
