@@ -92,4 +92,42 @@ public class ItemServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Connection connection = null;
+        try {
+            BufferedReader reader = req.getReader();
+            StringBuilder jsonInput = new StringBuilder();
+
+            String line = null;
+
+            while ((line = reader.readLine()) != null) {
+                jsonInput.append(line);
+            }
+
+            ObjectMapper objectMapper = new ObjectMapper();
+            ItemDTO itemDTO = objectMapper.readValue(jsonInput.toString(), ItemDTO.class);
+
+            connection = DBConnection.getDbConnection().getConnection();
+            PreparedStatement stm = connection.prepareStatement("UPDATE item SET description=?, unitPrice=?, qtyOnHand=? WHERE code=?");
+            stm.setObject(1, itemDTO.getDescription());
+            stm.setObject(2, itemDTO.getUnitPrice());
+            stm.setObject(3, itemDTO.getQtyOnHand());
+            stm.setObject(4, itemDTO.getCode());
+            int affectedRows = stm.executeUpdate();
+
+            resp.addHeader("Content-Type", "application/json");
+            resp.addHeader("Access-Control-Allow-Origin", "*");
+
+            if (affectedRows > 0) {
+                resp.setStatus(HttpServletResponse.SC_CREATED);
+            } else {
+                resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            }
+
+        } catch (ClassNotFoundException | SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
