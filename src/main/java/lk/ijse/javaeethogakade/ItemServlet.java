@@ -130,4 +130,39 @@ public class ItemServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Connection connection = null;
+        try {
+            BufferedReader reader = req.getReader();
+            StringBuilder jsonInput = new StringBuilder();
+
+            String line = null;
+
+            while ((line = reader.readLine()) != null) {
+                jsonInput.append(line);
+            }
+
+            ObjectMapper objectMapper = new ObjectMapper();
+            ItemDTO itemDTO = objectMapper.readValue(jsonInput.toString(), ItemDTO.class);
+
+            connection = DBConnection.getDbConnection().getConnection();
+            PreparedStatement stm = connection.prepareStatement("DELETE FROM item WHERE ItemCode=?");
+            stm.setObject(1, itemDTO.getCode());
+            int affectedRows = stm.executeUpdate();
+
+            resp.addHeader("Content-Type", "application/json");
+            resp.addHeader("Access-Control-Allow-Origin", "*");
+
+            if (affectedRows > 0) {
+                resp.setStatus(HttpServletResponse.SC_CREATED);
+            } else {
+                resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            }
+
+        } catch (ClassNotFoundException | SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
