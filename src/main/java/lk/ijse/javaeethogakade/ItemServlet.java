@@ -110,7 +110,7 @@ public class ItemServlet extends HttpServlet {
             ItemDTO itemDTO = objectMapper.readValue(jsonInput.toString(), ItemDTO.class);
 
             connection = DBConnection.getDbConnection().getConnection();
-            PreparedStatement stm = connection.prepareStatement("UPDATE item SET description=?, ItemName=?, ItemPrice=? WHERE ItemCode=?");
+            PreparedStatement stm = connection.prepareStatement("UPDATE item SET description=?, ItemName=?, ItemPrice=?,ItemQuantity WHERE ItemCode=?");
             stm.setObject(1, itemDTO.getDescription());
             stm.setObject(2, itemDTO.getUnitPrice());
             stm.setObject(3, itemDTO.getQtyOnHand());
