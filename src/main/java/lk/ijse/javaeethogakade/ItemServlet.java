@@ -148,7 +148,7 @@ public class ItemServlet extends HttpServlet {
             ItemDTO itemDTO = objectMapper.readValue(jsonInput.toString(), ItemDTO.class);
 
             connection = DBConnection.getDbConnection().getConnection();
-            PreparedStatement stm = connection.prepareStatement("DELETE FROM item WHERE ItemCode=?");
+            PreparedStatement stm = connection.prepareStatement("DELETE FROM items WHERE ItemCode=?");
             stm.setObject(1, itemDTO.getCode());
             int affectedRows = stm.executeUpdate();
 
