@@ -28,7 +28,7 @@ public class ItemServlet extends HttpServlet {
             resp.addHeader("Content-Type","application/json");
             resp.addHeader("Access-Control-Allow-Origin","*");
 
-            JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
+            JsonArrayBuilder allItem = Json.createArrayBuilder();
 
 
         } catch (SQLException e) {
