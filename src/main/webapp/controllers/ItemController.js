@@ -160,4 +160,27 @@ function saveItem() {
     });
 }
 
+function updateItem() {
+    var item = {
+        id: $("#iID").val(),
+        name: $("#IIName").val(),
+        price: $("#i-Price").val(),
+        Qty: $("#Iqty").val(),
+    };
+
+    $.ajax({
+        method: "PUT",
+        url: "http://localhost:8080/app/item",
+        contentType: "application/json",
+        async: true,
+        data: JSON.stringify(item),
+        success: function (data) {
+            alert("Item has been updated successfully");
+        },
+        error: function (data) {
+            alert("Failed to update the item");
+        },
+    });
+}
+
 export default Items;
