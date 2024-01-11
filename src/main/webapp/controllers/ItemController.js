@@ -188,7 +188,7 @@ function deleteItem() {
 
     $.ajax({
         method: "DELETE",
-        url: "http://localhost:8080/app/item?id=" + itemId,
+        url: `http://localhost:8080/app/item/${itemId}`,
         contentType: "application/json",
         async: true,
         success: function (data) {
