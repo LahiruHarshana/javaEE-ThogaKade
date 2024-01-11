@@ -23,6 +23,7 @@ public class ItemServlet extends HttpServlet {
             connection = DBConnection.getDbConnection().getConnection();
             PreparedStatement stm = connection.prepareStatement("SELECT * FROM item");
             ResultSet rst = stm.executeQuery();
+            resp.addHeader("Content-Type","application/json");
 
 
         } catch (SQLException e) {
