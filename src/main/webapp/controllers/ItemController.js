@@ -56,22 +56,8 @@ $tblItem.on("dblclick", "tr", function () {
 });
 
 $("#iUpdateBtn").click(() => {
-    const iIdValue = $iIdTxt.val();
-    const iNameValue = $iNameTxt.val();
-    const iPriceValue = $iPrice.val();
-    const iQtyValue = $iQty.val();
 
-    for (let i = 0; i < Items.length; i++) {
-        if (Items[i].id === iIdValue) {
-            Items[i] = {
-                id: iIdValue,
-                name: iNameValue,
-                price: iPriceValue,
-                Qty: iQtyValue,
-            };
-            break;
-        }
-    }
+    updateItem();
 
     updateItemTable();
 });
