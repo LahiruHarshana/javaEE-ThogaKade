@@ -49,11 +49,6 @@ $("#iSaveBtn").click(() => {
     updateItemTable();
 });
 
-$tblItem.on("dblclick", "tr", function () {
-    const index = $(this).index();
-    Items.splice(index, 1);
-    updateItemTable();
-});
 
 $("#iUpdateBtn").click(() => {
 
