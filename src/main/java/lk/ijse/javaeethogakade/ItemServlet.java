@@ -44,10 +44,7 @@ public class ItemServlet extends HttpServlet {
                         .add("qtyOnHand",qtyOnHand)
                         .build());
             }
-
             writer.print(allItem.build());
-
-
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -58,5 +55,39 @@ public class ItemServlet extends HttpServlet {
 
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Connection connection = null;
+        try {
+            BufferedReader reader = req.getReader();
+            StringBuilder jsonInput = new StringBuilder();
+
+            String line = null;
+
+            while ((line = reader.readLine()) != null) {
+                jsonInput.append(line);
+            }
+
+            ObjectMapper objectMapper = new ObjectMapper();
+            ItemDTO itemDTO = objectMapper.readValue(jsonInput.toString(), ItemDTO.class);
+
+            connection = DBConnection.getDbConnection().getConnection();
+            PreparedStatement stm = connection.prepareStatement("INSERT INTO item VALUES (?,?,?,?)");
+            stm.setObject(1, itemDTO.getCode());
+            stm.setObject(2, itemDTO.getDescription());
+            stm.setObject(3, itemDTO.getUnitPrice());
+            stm.setObject(4, itemDTO.getQtyOnHand());
+            int affectedRows = stm.executeUpdate();
+
+            resp.addHeader("Content-Type", "application/json");
+            resp.addHeader("Access-Control-Allow-Origin", "*");
+
+            if (affectedRows > 0) {
+                resp.setStatus(HttpServletResponse.SC_CREATED);
+            } else {
+                resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            }
+
+        } catch (ClassNotFoundException | SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
