@@ -24,6 +24,7 @@ public class ItemServlet extends HttpServlet {
         try {
             connection = DBConnection.getDbConnection().getConnection();
             PreparedStatement stm = connection.prepareStatement("SELECT * FROM item");
+            PrintWriter writer = resp.getWriter();
             ResultSet rst = stm.executeQuery();
             resp.addHeader("Content-Type","application/json");
             resp.addHeader("Access-Control-Allow-Origin","*");
@@ -43,6 +44,8 @@ public class ItemServlet extends HttpServlet {
                         .add("qtyOnHand",qtyOnHand)
                         .build());
             }
+
+            writer.print(allItem.build());
 
 
 
