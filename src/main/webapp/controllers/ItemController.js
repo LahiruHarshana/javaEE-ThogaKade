@@ -79,22 +79,15 @@ $("#iUpdateBtn").click(() => {
 function updateItemTable() {
     $tblItem.empty();
 
-    Items.forEach((item) => {
-        $tblItem.append(`<tr><td>${item.id}</td><td>${item.name}</td><td>${item.price}</td><td>${item.Qty}</td></tr>`); // Corrected table structure
-    });
+    for (let i = 0; i < Items.length; i++) {
+        const id = Items[i].id;
+        const name = Items[i].name;
+        const price = Items[i].price;
+        const Qty = Items[i].Qty;
 
-    $tblItem.find("tr").click(function () {
-        const row = $(this);
-        const id = row.find("td:eq(0)").text();
-        const name = row.find("td:eq(1)").text();
-        const price = row.find("td:eq(2)").text();
-        const qty = row.find("td:eq(3)").text();
-
-        $iIdTxt.val(id);
-        $iNameTxt.val(name);
-        $iPrice.val(price);
-        $iQty.val(qty);
-    });
+        const row = `<tr><td>${id}</td><td>${name}</td><td>${price}</td><td>${Qty}</td></tr>`;
+        $tblItem.append(row);
+    }
 }
 
 $("#iclearBtn").click(() => {
