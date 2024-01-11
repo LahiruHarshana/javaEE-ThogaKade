@@ -72,7 +72,7 @@ public class ItemServlet extends HttpServlet {
             ItemDTO itemDTO = objectMapper.readValue(jsonInput.toString(), ItemDTO.class);
 
             connection = DBConnection.getDbConnection().getConnection();
-            PreparedStatement stm = connection.prepareStatement("INSERT INTO item VALUES (?,?,?,?)");
+            PreparedStatement stm = connection.prepareStatement("INSERT INTO items VALUES (?,?,?,?)");
             stm.setObject(1, itemDTO.getCode());
             stm.setObject(2, itemDTO.getDescription());
             stm.setObject(3, itemDTO.getUnitPrice());
