@@ -13,6 +13,7 @@ import java.sql.SQLException;
 
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import lk.ijse.javaeethogakade.dto.ItemDTO;
 
 @WebServlet(urlPatterns = "/item")
 public class ItemServlet extends HttpServlet {
