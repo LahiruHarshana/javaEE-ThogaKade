@@ -112,16 +112,8 @@ public class ItemServletAPI extends HttpServlet {
             stm.setObject(2, itemDTO.getUnitPrice());
             stm.setObject(3, itemDTO.getQtyOnHand());
             stm.setObject(4, itemDTO.getCode());
-            int affectedRows = stm.executeUpdate();
+             stm.executeUpdate();
 
-            resp.addHeader("Content-Type", "application/json");
-            resp.addHeader("Access-Control-Allow-Origin", "*");
-
-            if (affectedRows > 0) {
-                resp.setStatus(HttpServletResponse.SC_CREATED);
-            } else {
-                resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            }
 
         } catch (ClassNotFoundException | SQLException e) {
             throw new RuntimeException(e);
