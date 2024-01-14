@@ -42,6 +42,8 @@ $("#iUpdateBtn").click(() => {
 
 $("#iDeleteBtn").click(() => {
     deleteItem();
+    updateItemTable();
+
 });
 
 
