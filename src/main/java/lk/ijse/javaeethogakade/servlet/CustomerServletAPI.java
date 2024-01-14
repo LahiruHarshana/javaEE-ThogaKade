@@ -12,15 +12,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import lk.ijse.javaeethogakade.dto.CustomerDto;
 
 @WebServlet(name = "customerServlet", value = "/customer")
-public class CustomerServlet extends HttpServlet {
+public class CustomerServletAPI extends HttpServlet {
     private String message;
 
     public void init() {
