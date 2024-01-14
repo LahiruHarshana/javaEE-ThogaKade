@@ -3,70 +3,75 @@ package lk.ijse.javaeethogakade.servlet;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.json.Json;
 import jakarta.json.JsonArrayBuilder;
-import jakarta.servlet.ServletException;
-import lk.ijse.javaeethogakade.db.DBConnection;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import lk.ijse.javaeethogakade.db.DBConnection;
 import lk.ijse.javaeethogakade.dto.ItemDTO;
 
 @WebServlet(name = "itemServlet", value = "/item")
 public class ItemServletAPI extends HttpServlet {
-    private String message;
 
-    public void init() {
-        message = "Hello World!";
-    }
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Connection connection = null;
         try {
             connection = DBConnection.getDbConnection().getConnection();
-            PreparedStatement stm = connection.prepareStatement("SELECT * FROM items");
+            PreparedStatement stm = connection.prepareStatement("SELECT * FROM Items");
             PrintWriter writer = resp.getWriter();
             ResultSet rst = stm.executeQuery();
-            resp.addHeader("Content-Type","application/json");
-            resp.addHeader("Access-Control-Allow-Origin","*");
+            resp.addHeader("Content-Type", "application/json");
+            resp.addHeader("Access-Control-Allow-Origin", "*");
 
-            JsonArrayBuilder allItem = Json.createArrayBuilder();
+            JsonArrayBuilder allItems = Json.createArrayBuilder();
 
-            while (rst.next()){
+            while (rst.next()) {
                 String code = rst.getString(1);
                 String description = rst.getString(2);
                 double unitPrice = rst.getDouble(3);
                 int qtyOnHand = rst.getInt(4);
 
-                allItem.add(Json.createObjectBuilder()
-                        .add("code",code)
-                        .add("description",description)
-                        .add("unitPrice",unitPrice)
-                        .add("qtyOnHand",qtyOnHand)
+                allItems.add(Json.createObjectBuilder()
+                        .add("code", code)
+                        .add("description", description)
+                        .add("unitPrice", unitPrice)
+                        .add("qtyOnHand", qtyOnHand)
                         .build());
             }
-            writer.print(allItem.build());
+            writer.print(allItems.build());
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
-
     @Override
-    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Connection connection = null;
-        try {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        try (Connection connection = DBConnection.getDbConnection().getConnection()) {
             BufferedReader reader = req.getReader();
             StringBuilder jsonInput = new StringBuilder();
 
-            String line = null;
-
+            String line;
             while ((line = reader.readLine()) != null) {
                 jsonInput.append(line);
             }
@@ -74,7 +79,6 @@ public class ItemServletAPI extends HttpServlet {
             ObjectMapper objectMapper = new ObjectMapper();
             ItemDTO itemDTO = objectMapper.readValue(jsonInput.toString(), ItemDTO.class);
 
-            connection = DBConnection.getDbConnection().getConnection();
             PreparedStatement stm = connection.prepareStatement("INSERT INTO Items VALUES (?,?,?,?)");
             stm.setObject(1, itemDTO.getCode());
             stm.setObject(2, itemDTO.getDescription());
@@ -82,7 +86,7 @@ public class ItemServletAPI extends HttpServlet {
             stm.setObject(4, itemDTO.getQtyOnHand());
             stm.executeUpdate();
 
-            resp.getWriter().println("Customer has been saved successfully");
+            resp.getWriter().println("Item has been saved successfully");
 
         } catch (ClassNotFoundException | SQLException e) {
             throw new RuntimeException(e);
@@ -91,13 +95,11 @@ public class ItemServletAPI extends HttpServlet {
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Connection connection = null;
-        try {
+        try (Connection connection = DBConnection.getDbConnection().getConnection()) {
             BufferedReader reader = req.getReader();
             StringBuilder jsonInput = new StringBuilder();
 
-            String line = null;
-
+            String line;
             while ((line = reader.readLine()) != null) {
                 jsonInput.append(line);
             }
@@ -105,7 +107,6 @@ public class ItemServletAPI extends HttpServlet {
             ObjectMapper objectMapper = new ObjectMapper();
             ItemDTO itemDTO = objectMapper.readValue(jsonInput.toString(), ItemDTO.class);
 
-            connection = DBConnection.getDbConnection().getConnection();
             PreparedStatement stm = connection.prepareStatement("UPDATE Items SET ItemName=?, ItemPrice=?, ItemQuantity=? WHERE ItemCode=?");
             stm.setObject(1, itemDTO.getDescription());
             stm.setObject(2, itemDTO.getUnitPrice());
@@ -113,6 +114,7 @@ public class ItemServletAPI extends HttpServlet {
             stm.setObject(4, itemDTO.getCode());
             stm.executeUpdate();
 
+            resp.getWriter().println("Item has been updated successfully");
 
         } catch (ClassNotFoundException | SQLException e) {
             throw new RuntimeException(e);
@@ -121,13 +123,11 @@ public class ItemServletAPI extends HttpServlet {
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Connection connection = null;
-        try {
+        try (Connection connection = DBConnection.getDbConnection().getConnection()) {
             BufferedReader reader = req.getReader();
             StringBuilder jsonInput = new StringBuilder();
 
-            String line = null;
-
+            String line;
             while ((line = reader.readLine()) != null) {
                 jsonInput.append(line);
             }
@@ -135,7 +135,6 @@ public class ItemServletAPI extends HttpServlet {
             ObjectMapper objectMapper = new ObjectMapper();
             ItemDTO itemDTO = objectMapper.readValue(jsonInput.toString(), ItemDTO.class);
 
-            connection = DBConnection.getDbConnection().getConnection();
             PreparedStatement stm = connection.prepareStatement("DELETE FROM Items WHERE ItemCode=?");
             stm.setObject(1, itemDTO.getCode());
             int affectedRows = stm.executeUpdate();

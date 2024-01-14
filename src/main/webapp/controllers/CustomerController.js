@@ -148,22 +148,20 @@ function updateCustomer(){
 }
 
 function deleteCustomer() {
-    let customerId = $cIdTxt.val();
+    var customerIdToDelete = $cIdTxt.val();
 
     $.ajax({
         type: "DELETE",
-        url: `http://localhost:8080/app/customer/${customerId}`,
+        url: `http://localhost:8080/app/customer/${customerIdToDelete}`,
         success: function (resp) {
             alert("Customer Deleted");
             clearForm();
-            updateCustomerTable();
         },
         error: function (resp) {
             alert("Failed to delete the customer");
         }
     });
-
 }
 
-export { saveCustomer, updateCustomer };
+export { saveCustomer, updateCustomer ,deleteCustomer };
 

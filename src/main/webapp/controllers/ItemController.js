@@ -1,34 +1,26 @@
-var Items =[];
+var customerFormVar = document.querySelector("#customerForm");
+var itemFormVar = document.querySelector("#itemForm");
+var orderrFormVar = document.querySelector("#orderForm");
+var homeFormVar = document.querySelector("#homeeeeee");
 
-var customerFormVar =document.querySelector("#customerForm");
-var itemFormVar =document.querySelector("#itemForm");
-var orderrFormVar =document.querySelector("#orderForm");
-var homeFormVAr = document.querySelector("#homeeeeee");
+homeFormVar.style.display = 'inline';
+customerFormVar.style.display = 'none';
+itemFormVar.style.display = 'none';
+orderrFormVar.style.display = 'none';
 
-
-homeFormVAr.style.display='inline'
-customerFormVar.style.display='none';
-itemFormVar.style.display='none';
-orderrFormVar.style.display='none';
-
-
-
-$("#customerNav").click(function (){
-    homeFormVAr.style.display='none'
-    customerFormVar.style.display='inline';
-    itemFormVar.style.display='none';
-    orderrFormVar.style.display='none';
+$("#customerNav").click(function () {
+    homeFormVar.style.display = 'none';
+    customerFormVar.style.display = 'inline';
+    itemFormVar.style.display = 'none';
+    orderrFormVar.style.display = 'none';
 });
 
-
-$("#itemNav").click(function (){
-    homeFormVAr.style.display='none'
-    customerFormVar.style.display='none';
-    itemFormVar.style.display='inline';
-    orderrFormVar.style.display='none';
+$("#itemNav").click(function () {
+    homeFormVar.style.display = 'none';
+    customerFormVar.style.display = 'none';
+    itemFormVar.style.display = 'inline';
+    orderrFormVar.style.display = 'none';
 });
-
-
 
 var $tblItem = $("#itemTbl");
 var $iIdTxt = $("#iID");
@@ -36,73 +28,77 @@ var $iNameTxt = $("#IIName");
 var $iPrice = $("#i-Price");
 var $iQty = $("#Iqty");
 
-
 $("#iSaveBtn").click(() => {
     saveItem();
-
-    updateItemTable();
 });
-
 
 $("#iUpdateBtn").click(() => {
-
     updateItem();
-
-    updateItemTable();
-});
-
-function updateItemTable() {
-    $tblItem.empty();
-
-    for (let i = 0; i < Items.length; i++) {
-        const id = Items[i].id;
-        const name = Items[i].name;
-        const price = Items[i].price;
-        const Qty = Items[i].Qty;
-
-        const row = `<tr><td>${id}</td><td>${name}</td><td>${price}</td><td>${Qty}</td></tr>`;
-        $tblItem.append(row);
-    }
-}
-
-$("#iclearBtn").click(() => {
-    $iNameTxt.val("");
-    $iIdTxt.val("");
-    $iPrice.val("");
-    $iQty.val("");
 });
 
 $("#iDeleteBtn").click(() => {
     deleteItem();
-    updateItemTable();
 });
 
-$("#iSearchBtn").click(function () {
-    const searchValue = $("#iSearchTxt").val(); // Changed to use the item ID field for searching
+
+function updateItemTable() {
+    $tblItem.empty();
+
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:8080/app/item",
+        success: function (items) {
+            for (let i in items) {
+                const id = items[i].code;
+                const name = items[i].description;
+                const price = items[i].unitPrice;
+                const Qty = items[i].qtyOnHand;
+
+                const row = `<tr><td>${id}</td><td>${name}</td><td>${price}</td><td>${Qty}</td></tr>`;
+                $tblItem.append(row);
+            }
+        },
+        error: function (resp) {
+            alert("Failed to load items");
+        }
+    });
+}
+
+function searchItem() {
+    const searchValue = $("#iSearchTxt").val();
 
     if (searchValue.trim() === "") {
         alert("Please enter a valid Item ID to search.");
         return;
     }
 
-    const item = Items.find((i) => i.id === searchValue);
+    $.ajax({
+        type: "GET",
+        url: `http://localhost:8080/app/item/${searchValue}`,
+        success: function (item) {
+            if (item) {
+                $iNameTxt.val(item.description);
+                $iIdTxt.val(item.code);
+                $iPrice.val(item.unitPrice);
+                $iQty.val(item.qtyOnHand);
+            } else {
+                alert("Item not found.");
+            }
+        },
+        error: function (resp) {
+            alert("Failed to fetch item details");
+        }
+    });
+}
+$("#iSearchBtn").click(searchItem);
 
-    if (item) {
-        $iNameTxt.val(item.name);
-        $iIdTxt.val(item.id);
-        $iPrice.val(item.price);
-        $iQty.val(item.Qty);
-    } else {
-        alert("Item not found.");
-    }
-});
 
 function saveItem() {
     var item = {
-        code: $("#iID").val(),
-        description: $("#IIName").val(),
-        unitPrice: $("#i-Price").val(),
-        qtyOnHand: $("#Iqty").val(),
+        code: $iIdTxt.val(),
+        description: $iNameTxt.val(),
+        unitPrice: $iPrice.val(),
+        qtyOnHand: $iQty.val(),
     };
 
     $.ajax({
@@ -120,14 +116,12 @@ function saveItem() {
     });
 }
 
-
-
 function updateItem() {
     var item = {
-        code: $("#iID").val(),
-        description: $("#IIName").val(),
-        unitPrice: $("#i-Price").val(),
-        qtyOnHand: $("#Iqty").val(),
+        code: $iIdTxt.val(),
+        description: $iNameTxt.val(),
+        unitPrice: $iPrice.val(),
+        qtyOnHand: $iQty.val(),
     };
 
     $.ajax({
@@ -146,7 +140,7 @@ function updateItem() {
 }
 
 function deleteItem() {
-    var itemId = $("#iID").val();
+    var itemId = $iIdTxt.val();
 
     $.ajax({
         method: "DELETE",
@@ -161,5 +155,3 @@ function deleteItem() {
         },
     });
 }
-
-export default Items;

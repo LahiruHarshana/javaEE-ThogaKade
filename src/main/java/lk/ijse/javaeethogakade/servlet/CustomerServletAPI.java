@@ -17,7 +17,9 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import lk.ijse.javaeethogakade.dto.CustomerDto;
 
-@WebServlet(name = "customerServlet", value = "/customer")
+import javax.ws.rs.HttpMethod;
+
+@WebServlet(name = "customerServlet", value = "/customer/*")
 public class CustomerServletAPI extends HttpServlet {
     private String message;
 
@@ -135,13 +137,10 @@ public class CustomerServletAPI extends HttpServlet {
 
     @Override
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Connection connection = null;
-        try {
-            String customerId = request.getParameter("cusID");
+        try (Connection connection = DBConnection.getDbConnection().getConnection()) {
+            String customerId = request.getPathInfo().substring(1);
 
-            connection = DBConnection.getDbConnection().getConnection();
             PreparedStatement stm = connection.prepareStatement("DELETE FROM customer WHERE cusID=?");
-
             stm.setString(1, customerId);
 
             int affectedRows = stm.executeUpdate();
@@ -153,15 +152,8 @@ public class CustomerServletAPI extends HttpServlet {
             }
         } catch (SQLException | ClassNotFoundException e) {
             throw new ServletException("Error in doDelete method", e);
-        } finally {
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
         }
     }
+
 
 }
