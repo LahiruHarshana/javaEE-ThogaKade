@@ -17,7 +17,7 @@ import jakarta.servlet.annotation.*;
 import lk.ijse.javaeethogakade.dto.ItemDTO;
 
 @WebServlet(name = "itemServlet", value = "/item")
-public class ItemServlet extends HttpServlet {
+public class ItemServletAPI extends HttpServlet {
     private String message;
 
     public void init() {
