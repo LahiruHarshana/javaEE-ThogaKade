@@ -124,10 +124,10 @@ function saveItem() {
 
 function updateItem() {
     var item = {
-        id: $("#iID").val(),
-        name: $("#IIName").val(),
-        price: $("#i-Price").val(),
-        Qty: $("#Iqty").val(),
+        code: $("#iID").val(),
+        description: $("#IIName").val(),
+        unitPrice: $("#i-Price").val(),
+        qtyOnHand: $("#Iqty").val(),
     };
 
     $.ajax({

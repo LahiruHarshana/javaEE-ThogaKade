@@ -84,7 +84,6 @@ public class ItemServletAPI extends HttpServlet {
 
             resp.getWriter().println("Customer has been saved successfully");
 
-
         } catch (ClassNotFoundException | SQLException e) {
             throw new RuntimeException(e);
         }
@@ -112,7 +111,7 @@ public class ItemServletAPI extends HttpServlet {
             stm.setObject(2, itemDTO.getUnitPrice());
             stm.setObject(3, itemDTO.getQtyOnHand());
             stm.setObject(4, itemDTO.getCode());
-             stm.executeUpdate();
+            stm.executeUpdate();
 
 
         } catch (ClassNotFoundException | SQLException e) {
