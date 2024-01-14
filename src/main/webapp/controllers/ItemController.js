@@ -36,6 +36,8 @@ $("#iSaveBtn").click(() => {
 
 $("#iUpdateBtn").click(() => {
     updateItem();
+    updateItemTable();
+
 });
 
 $("#iDeleteBtn").click(() => {
