@@ -75,7 +75,7 @@ public class ItemServlet extends HttpServlet {
             ItemDTO itemDTO = objectMapper.readValue(jsonInput.toString(), ItemDTO.class);
 
             connection = DBConnection.getDbConnection().getConnection();
-            PreparedStatement stm = connection.prepareStatement("INSERT INTO items VALUES (?,?,?,?)");
+            PreparedStatement stm = connection.prepareStatement("INSERT INTO Items VALUES (?,?,?,?)");
             stm.setObject(1, itemDTO.getCode());
             stm.setObject(2, itemDTO.getDescription());
             stm.setObject(3, itemDTO.getUnitPrice());
@@ -107,7 +107,7 @@ public class ItemServlet extends HttpServlet {
             ItemDTO itemDTO = objectMapper.readValue(jsonInput.toString(), ItemDTO.class);
 
             connection = DBConnection.getDbConnection().getConnection();
-            PreparedStatement stm = connection.prepareStatement("UPDATE items SET ItemName=?, ItemPrice=?, ItemQuantity=? WHERE ItemCode=?");
+            PreparedStatement stm = connection.prepareStatement("UPDATE Items SET ItemName=?, ItemPrice=?, ItemQuantity=? WHERE ItemCode=?");
             stm.setObject(1, itemDTO.getDescription());
             stm.setObject(2, itemDTO.getUnitPrice());
             stm.setObject(3, itemDTO.getQtyOnHand());
@@ -145,7 +145,7 @@ public class ItemServlet extends HttpServlet {
             ItemDTO itemDTO = objectMapper.readValue(jsonInput.toString(), ItemDTO.class);
 
             connection = DBConnection.getDbConnection().getConnection();
-            PreparedStatement stm = connection.prepareStatement("DELETE FROM items WHERE ItemCode=?");
+            PreparedStatement stm = connection.prepareStatement("DELETE FROM Items WHERE ItemCode=?");
             stm.setObject(1, itemDTO.getCode());
             int affectedRows = stm.executeUpdate();
 
