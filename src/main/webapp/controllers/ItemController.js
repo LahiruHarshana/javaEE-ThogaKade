@@ -30,6 +30,8 @@ var $iQty = $("#Iqty");
 
 $("#iSaveBtn").click(() => {
     saveItem();
+    updateItemTable();
+
 });
 
 $("#iUpdateBtn").click(() => {
