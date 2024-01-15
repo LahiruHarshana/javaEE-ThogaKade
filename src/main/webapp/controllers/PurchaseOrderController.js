@@ -38,19 +38,6 @@ function loadCustomerIds() {
         let selectId = $("#selectCustomerId");
         selectId.children().remove();
 
-        $ajax({
-            method: "GET",
-            url: "http://localhost:8080/pos/api/v1/customers",
-            async: true,
-            dataType: 'json',
-            success: function (resp) {
-                console.log(resp);
-                for (let i = 0; i < resp.length; i++) {
-                    let option = `<option value="${resp[i].id}">${resp[i].id}</option>`;
-                    selectId.append(option);
-                }
-            }
-        });
 
         homeFormVar.style.display='none'
         customerFormVar.style.display = "none";
