@@ -39,6 +39,8 @@ function loadCustomerIds() {
         selectId.children().remove();
 
 
+        loadCustomerIds();
+
         homeFormVar.style.display='none'
         customerFormVar.style.display = "none";
         itemFormVar.style.display = "none";
