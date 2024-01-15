@@ -15,7 +15,7 @@ function loadCustomerIds() {
 
     $.ajax({
         method: "GET",
-        url: "http://localhost:8080/pos/api/v1/customers",
+        url: "http://localhost:8080/app/customer",
         async: true,
         dataType: 'json',
         success: function (resp) {
@@ -34,11 +34,6 @@ function loadCustomerIds() {
         const orderrFormVar = document.querySelector("#orderForm");
         const homeFormVar = document.querySelector("#homeeeeee");
 
-
-        let selectId = $("#selectCustomerId");
-        selectId.children().remove();
-
-
         loadCustomerIds();
 
         homeFormVar.style.display='none'
@@ -46,14 +41,10 @@ function loadCustomerIds() {
         itemFormVar.style.display = "none";
         orderrFormVar.style.display = "inline";
 
-
-
-
-
-
     });
 
     $("#selectCustomerId").change(function () {
+
         validated1();
         validated2();
         validated3();
