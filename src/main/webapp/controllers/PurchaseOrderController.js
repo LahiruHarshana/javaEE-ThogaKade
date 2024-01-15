@@ -55,6 +55,7 @@ function loadItemIds() {
         const homeFormVar = document.querySelector("#homeeeeee");
 
         loadCustomerIds();
+        loadItemIds();
 
         homeFormVar.style.display='none'
         customerFormVar.style.display = "none";
