@@ -22,6 +22,12 @@ import java.sql.SQLException;
 public class CustomerServletAPI extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        String customerId = request.getParameter("customerId");
+        if (customerId != null) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+            return;
+        }
         try {
             BufferedReader reader = request.getReader();
             StringBuilder jsonInput = new StringBuilder();
