@@ -15,8 +15,6 @@ var Orders = [];
         itemFormVar.style.display = "none";
         orderrFormVar.style.display = "inline";
 
-        // $("#selectCustomerId").val("");
-        // $("#oSelectItem").val("");
 
     });
 
