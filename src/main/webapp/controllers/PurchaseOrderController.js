@@ -48,8 +48,18 @@ function loadCustomerIds() {
         const selectedValue = $(this).val();
 
         $.ajax({
-
-        }
+            method: "GET",
+            url: "http://localhost:8080/app/customer,
+            async: true,
+            dataType: 'json',
+            success: function (resp) {
+                console.log(resp);
+                $("#oCName").val(resp.name);
+                $("#CustomerIDORderForm").val(resp.id);
+                $("#oCAddress").val(resp.address);
+                $("#oCSalary").val(resp.salary);
+            }
+        });
 
         validated1();
         validated2();
