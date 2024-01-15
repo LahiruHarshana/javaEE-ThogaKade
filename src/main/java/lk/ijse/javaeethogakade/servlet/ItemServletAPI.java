@@ -139,7 +139,7 @@ public class ItemServletAPI extends HttpServlet {
         } catch (SQLException | ClassNotFoundException e) {
             resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             resp.getWriter().println("{\"error\": \"Error processing the request: " + e.getMessage() + "\"}");
-            e.printStackTrace(); // Log the exception for debugging
+            e.printStackTrace();
         }
     }
 
