@@ -28,6 +28,25 @@ function loadCustomerIds() {
     });
 }
 
+function loadItemIds() {
+    let selectId = $("#oSelectItem");
+    selectId.empty();
+
+    $.ajax({
+        method: "GET",
+        url: "http://localhost:8080/app/item",
+        async: true,
+        dataType: 'json',
+        success: function (resp) {
+            console.log(resp);
+            for (let i = 0; i < resp.length; i++) {
+                let option = `<option value="${resp[i].id}">${resp[i].id}</option>`;
+                selectId.append(option);
+            }
+        }
+    });
+}
+
     $("#orderNav").click(function () {
         const customerFormVar = document.querySelector("#customerForm");
         const itemFormVar = document.querySelector("#itemForm");
