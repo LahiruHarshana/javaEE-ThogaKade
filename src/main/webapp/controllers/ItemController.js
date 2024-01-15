@@ -8,6 +8,14 @@ customerFormVar.style.display = 'none';
 itemFormVar.style.display = 'none';
 orderrFormVar.style.display = 'none';
 
+
+$("#homeNav").click(function () {
+    homeFormVar.style.display = 'inline';
+    customerFormVar.style.display = 'none';
+    itemFormVar.style.display = 'none';
+    orderrFormVar.style.display = 'none';
+});
+
 $("#customerNav").click(function () {
     homeFormVar.style.display = 'none';
     customerFormVar.style.display = 'inline';
@@ -21,6 +29,15 @@ $("#itemNav").click(function () {
     itemFormVar.style.display = 'inline';
     orderrFormVar.style.display = 'none';
 });
+
+$("#orderNav").click(function () {
+    homeFormVar.style.display = 'none';
+    customerFormVar.style.display = 'none';
+    itemFormVar.style.display = 'none';
+    orderrFormVar.style.display = 'inline';
+});
+
+
 
 var $tblItem = $("#itemTbl");
 var $iIdTxt = $("#iID");
