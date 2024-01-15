@@ -33,16 +33,7 @@ var Orders = [];
     });
 
     $("#oSelectItem").change(function () {
-        // const selectedValue = $(this).val();
-        // for (let i = 0; i < Items.length; i++) {
-        //     if (selectedValue === Items[i].id) {
-        //         $("#itemID").val(Items[i].id);
-        //         $("#ItemNameOrder").val(Items[i].name);
-        //         $("#iOPrice").val(Items[i].price);
-        //         $("#iOQty").val(Items[i].Qty);
-        //
-        //     }
-        // }
+
         validated1();
         validated2();
         validated3();
@@ -62,17 +53,6 @@ var Orders = [];
         var total = price * qty;
 
         var itemID = $("#itemID").val();
-        // var found = false;
-        //
-        // for (let i = 0; i < Orders.length; i++) {
-        //     if (Orders[i].itemID == itemID) {
-        //         let existingQty = parseInt(Orders[i].Qty);
-        //         existingQty += qty;
-        //         Orders[i].Qty = existingQty;
-        //         found = true;
-        //         break;
-        //     }
-        // }
 
         if (!found) {
             const order = {
