@@ -55,7 +55,6 @@ $("#selectCustomerId").change(function () {
             customerId: selectedValue
         },
         success: function (resp) {
-            // Check if the response is an array and not empty
             if (Array.isArray(resp) && resp.length > 0) {
                 const customer = resp[0];
 
