@@ -19,16 +19,6 @@ var Orders = [];
     });
 
     $("#selectCustomerId").change(function () {
-        // const selectedValue = $(this).val();
-        // for (let i = 0; i < Customers.length; i++) {
-        //     if (selectedValue === Customers[i].id) {
-        //         $("#oCName").val(Customers[i].name);
-        //         $("#CustomerIDORderForm").val(Customers[i].id);
-        //         $("#oCAddress").val(Customers[i].address);
-        //         $("#oCSalary").val(Customers[i].salary);
-        //
-        //     }
-        // }
         validated1();
         validated2();
         validated3();
