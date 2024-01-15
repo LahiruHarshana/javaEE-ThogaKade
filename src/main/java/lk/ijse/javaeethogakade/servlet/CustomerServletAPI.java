@@ -1,4 +1,3 @@
-// CustomerServletAPI.java
 package lk.ijse.javaeethogakade.servlet;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
