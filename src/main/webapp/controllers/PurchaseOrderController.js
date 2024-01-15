@@ -106,6 +106,32 @@ $("#selectCustomerId").change(function () {
 
     $("#oSelectItem").change(function () {
 
+
+        const selectedValue = $(this).val();
+
+        $.ajax({
+            method: "GET",
+            url: "http://localhost:8080/app/item",
+            async: true,
+            dataType: 'json',
+            data: {
+                itemId: selectedValue
+            },
+            success: function (resp) {
+                if (Array.isArray(resp) && resp.length > 0) {
+                    const item = resp[0];
+                    $("#itemID").val(item.id);
+                    $("#ItemNameOrder").val(item.name);
+                    $("#iOPrice").val(item.price);
+                    $("#iOQty").val(item.qty);
+                } else {
+                    console.log("No item found with the specified ID");
+                    // Handle the case when no item is found
+                }
+            }
+        });
+
+
         validated1();
         validated2();
         validated3();
