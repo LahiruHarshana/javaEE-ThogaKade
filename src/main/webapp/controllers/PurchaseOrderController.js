@@ -4,54 +4,33 @@ import { validated1, validated2, validated3, validated4, validated5, validated6,
 
 var Orders = [];
 
-$(document).ready(function () {
     $("#orderNav").click(function () {
         const customerFormVar = document.querySelector("#customerForm");
         const itemFormVar = document.querySelector("#itemForm");
         const orderrFormVar = document.querySelector("#orderForm");
         const homeFormVar = document.querySelector("#homeeeeee")
 
-        const selectElement = $("#selectCustomerId");
-        selectElement.children().remove();
-
-        for (let i = 0; i < Customers.length; i++) {
-            const option = $("<option></option>");
-            option.val(Customers[i].id);
-            option.text(Customers[i].id);
-            selectElement.append(option);
-        }
-
-        const selectItem = $("#oSelectItem");
-        selectItem.children().remove();
-
-        for (let i = 0; i < Items.length; i++) {
-            const option = $("<option></option>");
-            option.val(Items[i].id);
-            option.text(Items[i].id);
-            selectItem.append(option);
-        }
-
         homeFormVar.style.display='none'
         customerFormVar.style.display = "none";
         itemFormVar.style.display = "none";
         orderrFormVar.style.display = "inline";
 
-        $("#selectCustomerId").val("");
-        $("#oSelectItem").val("");
+        // $("#selectCustomerId").val("");
+        // $("#oSelectItem").val("");
 
     });
 
     $("#selectCustomerId").change(function () {
-        const selectedValue = $(this).val();
-        for (let i = 0; i < Customers.length; i++) {
-            if (selectedValue === Customers[i].id) {
-                $("#oCName").val(Customers[i].name);
-                $("#CustomerIDORderForm").val(Customers[i].id);
-                $("#oCAddress").val(Customers[i].address);
-                $("#oCSalary").val(Customers[i].salary);
-
-            }
-        }
+        // const selectedValue = $(this).val();
+        // for (let i = 0; i < Customers.length; i++) {
+        //     if (selectedValue === Customers[i].id) {
+        //         $("#oCName").val(Customers[i].name);
+        //         $("#CustomerIDORderForm").val(Customers[i].id);
+        //         $("#oCAddress").val(Customers[i].address);
+        //         $("#oCSalary").val(Customers[i].salary);
+        //
+        //     }
+        // }
         validated1();
         validated2();
         validated3();
@@ -66,16 +45,16 @@ $(document).ready(function () {
     });
 
     $("#oSelectItem").change(function () {
-        const selectedValue = $(this).val();
-        for (let i = 0; i < Items.length; i++) {
-            if (selectedValue === Items[i].id) {
-                $("#itemID").val(Items[i].id);
-                $("#ItemNameOrder").val(Items[i].name);
-                $("#iOPrice").val(Items[i].price);
-                $("#iOQty").val(Items[i].Qty);
-
-            }
-        }
+        // const selectedValue = $(this).val();
+        // for (let i = 0; i < Items.length; i++) {
+        //     if (selectedValue === Items[i].id) {
+        //         $("#itemID").val(Items[i].id);
+        //         $("#ItemNameOrder").val(Items[i].name);
+        //         $("#iOPrice").val(Items[i].price);
+        //         $("#iOQty").val(Items[i].Qty);
+        //
+        //     }
+        // }
         validated1();
         validated2();
         validated3();
@@ -95,17 +74,17 @@ $(document).ready(function () {
         var total = price * qty;
 
         var itemID = $("#itemID").val();
-        var found = false;
-
-        for (let i = 0; i < Orders.length; i++) {
-            if (Orders[i].itemID == itemID) {
-                let existingQty = parseInt(Orders[i].Qty);
-                existingQty += qty;
-                Orders[i].Qty = existingQty;
-                found = true;
-                break;
-            }
-        }
+        // var found = false;
+        //
+        // for (let i = 0; i < Orders.length; i++) {
+        //     if (Orders[i].itemID == itemID) {
+        //         let existingQty = parseInt(Orders[i].Qty);
+        //         existingQty += qty;
+        //         Orders[i].Qty = existingQty;
+        //         found = true;
+        //         break;
+        //     }
+        // }
 
         if (!found) {
             const order = {
@@ -181,7 +160,6 @@ $(document).ready(function () {
         }
 
     });
-});
 
 function updateOrderTable() {
     $("#tblOrderBody").empty();
