@@ -11,7 +11,7 @@ $(document).ready(function () {
 
 function loadCustomerIds() {
     let selectId = $("#selectCustomerId");
-    selectId.empty(); // Clear existing options
+    selectId.empty();
 
     $.ajax({
         method: "GET",
