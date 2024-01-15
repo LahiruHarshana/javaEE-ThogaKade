@@ -6,6 +6,7 @@ var Orders = [];
 
 $(document).ready(function () {
     loadCustomerIds();
+    loadItemIds();
 });
 
 
