@@ -49,7 +49,7 @@ function loadCustomerIds() {
 
         $.ajax({
             method: "GET",
-            url: "http://localhost:8080/app/customer,
+            url: "http://localhost:8080/app/customer",
             async: true,
             dataType: 'json',
             data: {
