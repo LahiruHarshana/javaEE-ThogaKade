@@ -52,6 +52,9 @@ function loadCustomerIds() {
             url: "http://localhost:8080/app/customer,
             async: true,
             dataType: 'json',
+            data: {
+                customerId: selectedCustomerId
+            },
             success: function (resp) {
                 console.log(resp);
                 $("#oCName").val(resp.name);
