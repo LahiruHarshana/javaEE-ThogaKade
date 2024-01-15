@@ -53,16 +53,16 @@ public class CustomerServletAPI extends HttpServlet {
             ResultSet rst = SQLUtil.execute(sql, customerId);
 
             PrintWriter writer = response.getWriter();
-            response.addHeader("Content-Type", "application/json");
+            response.setContentType("application/json"); // Set content type explicitly
             response.addHeader("Access-Control-Allow-Origin", "*");
 
             JsonArrayBuilder allCustomer = Json.createArrayBuilder();
 
             while (rst.next()) {
-                String id = rst.getString(1);
-                String name = rst.getString(2);
-                String address = rst.getString(3);
-                String salary = rst.getString(4);
+                String id = rst.getString("cusID"); // Use the actual column name
+                String name = rst.getString("cusName");
+                String address = rst.getString("cusAddress");
+                double salary = rst.getDouble("cusSalary");
 
                 JsonObjectBuilder customer = Json.createObjectBuilder();
 
@@ -81,7 +81,6 @@ public class CustomerServletAPI extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         String customerId = request.getParameter("customerId");
         if (customerId != null) {
             getAll(customerId, response);
@@ -92,16 +91,16 @@ public class CustomerServletAPI extends HttpServlet {
             ResultSet rst = SQLUtil.execute(sql);
 
             PrintWriter writer = response.getWriter();
-            response.addHeader("Content-Type", "application/json");
+            response.setContentType("application/json"); // Set content type explicitly
             response.addHeader("Access-Control-Allow-Origin", "*");
 
             JsonArrayBuilder allCustomer = Json.createArrayBuilder();
 
             while (rst.next()) {
-                String id = rst.getString(1);
-                String name = rst.getString(2);
-                String address = rst.getString(3);
-                double salary = rst.getDouble(4);
+                String id = rst.getString("cusID");
+                String name = rst.getString("cusName");
+                String address = rst.getString("cusAddress");
+                double salary = rst.getDouble("cusSalary");
 
                 JsonObjectBuilder customer = Json.createObjectBuilder();
 
@@ -117,6 +116,7 @@ public class CustomerServletAPI extends HttpServlet {
             throw new ServletException("Error in doGet method", e);
         }
     }
+
 
     @Override
     protected void doPut(HttpServletRequest request, HttpServletResponse response) throws IOException {

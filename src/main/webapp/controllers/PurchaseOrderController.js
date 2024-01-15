@@ -43,25 +43,26 @@ function loadCustomerIds() {
 
     });
 
-    $("#selectCustomerId").change(function () {
+$("#selectCustomerId").change(function () {
+    const selectedValue = $(this).val();
 
-        const selectedValue = $(this).val();
+    $.ajax({
+        method: "GET",
+        url: "http://localhost:8080/app/customer",
+        async: true,
+        dataType: 'json',
+        data: {
+            customerId: selectedValue
+        },
+        success: function (resp) {
+            // Check if the response is an array and not empty
+            if (Array.isArray(resp) && resp.length > 0) {
+                const customer = resp[0];
 
-        $.ajax({
-            method: "GET",
-            url: "http://localhost:8080/app/customer",
-            async: true,
-            dataType: 'json',
-            data: {
-                customerId: selectedValue
-            },
-            success: function (resp) {
-                console.log(resp);
-                $("#oCName").val(resp.name);
-                $("#CustomerIDORderForm").val(resp.id);
-                $("#oCAddress").val(resp.address);
-                $("#oCSalary").val(resp.salary);
-
+                $("#oCName").val(customer.name);
+                $("#CustomerIDORderForm").val(customer.id);
+                $("#oCAddress").val(customer.address);
+                $("#oCSalary").val(customer.salary);
 
                 validated1();
                 validated2();
@@ -74,9 +75,14 @@ function loadCustomerIds() {
                 validated9();
                 validated10();
                 validated11();
+            } else {
+                console.log("No customer found with the specified ID");
+                // Handle the case when no customer is found
             }
-        });
+        }
     });
+});
+
 
     $("#oSelectItem").change(function () {
 
