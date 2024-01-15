@@ -64,8 +64,8 @@ function updateItemTable() {
                 $tblItem.append(row);
             }
         },
-        error: function (resp) {
-            alert("Failed to load items");
+        error: function (xhr, status, error) {
+            alert("Failed to load items: " + error);
         }
     });
 }
@@ -156,8 +156,9 @@ function deleteItem() {
         success: function (data) {
             alert("Item has been deleted successfully");
         },
-        error: function (data) {
-            alert("Failed to delete the item");
+        error: function (xhr, status, error) {
+            alert("Failed to delete the item: " + error);
         },
     });
 }
+
