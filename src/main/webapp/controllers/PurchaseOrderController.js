@@ -45,6 +45,8 @@ function loadCustomerIds() {
 
     $("#selectCustomerId").change(function () {
 
+        const selectedValue = $(this).val();
+
         validated1();
         validated2();
         validated3();
