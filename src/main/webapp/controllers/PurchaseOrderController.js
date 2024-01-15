@@ -53,7 +53,7 @@ function loadCustomerIds() {
             async: true,
             dataType: 'json',
             data: {
-                customerId: selectedCustomerId
+                customerId: selectedValue
             },
             success: function (resp) {
                 console.log(resp);
@@ -61,20 +61,21 @@ function loadCustomerIds() {
                 $("#CustomerIDORderForm").val(resp.id);
                 $("#oCAddress").val(resp.address);
                 $("#oCSalary").val(resp.salary);
+
+
+                validated1();
+                validated2();
+                validated3();
+                validated4();
+                validated5();
+                validated6();
+                validated7();
+                validated8();
+                validated9();
+                validated10();
+                validated11();
             }
         });
-
-        validated1();
-        validated2();
-        validated3();
-        validated4();
-        validated5();
-        validated6();
-        validated7();
-        validated8();
-        validated9();
-        validated10();
-        validated11();
     });
 
     $("#oSelectItem").change(function () {

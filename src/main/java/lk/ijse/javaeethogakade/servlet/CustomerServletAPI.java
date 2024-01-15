@@ -22,12 +22,6 @@ import java.sql.SQLException;
 public class CustomerServletAPI extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
-        String customerId = request.getParameter("customerId");
-        if (customerId != null) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST);
-            return;
-        }
         try {
             BufferedReader reader = request.getReader();
             StringBuilder jsonInput = new StringBuilder();
@@ -53,8 +47,46 @@ public class CustomerServletAPI extends HttpServlet {
         }
     }
 
+    private void getAll(String customerId, HttpServletResponse response) {
+        try {
+            String sql = "SELECT * FROM customer WHERE cusID=?";
+            ResultSet rst = SQLUtil.execute(sql, customerId);
+
+            PrintWriter writer = response.getWriter();
+            response.addHeader("Content-Type", "application/json");
+            response.addHeader("Access-Control-Allow-Origin", "*");
+
+            JsonArrayBuilder allCustomer = Json.createArrayBuilder();
+
+            while (rst.next()) {
+                String id = rst.getString(1);
+                String name = rst.getString(2);
+                String address = rst.getString(3);
+                String salary = rst.getString(4);
+
+                JsonObjectBuilder customer = Json.createObjectBuilder();
+
+                customer.add("id", id);
+                customer.add("name", name);
+                customer.add("address", address);
+                customer.add("salary", salary);
+
+                allCustomer.add(customer.build());
+            }
+            writer.print(allCustomer.build());
+        } catch (ClassNotFoundException | SQLException | IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        String customerId = request.getParameter("customerId");
+        if (customerId != null) {
+            getAll(customerId, response);
+            return;
+        }
         try {
             String sql = "SELECT * FROM customer";
             ResultSet rst = SQLUtil.execute(sql);
@@ -69,7 +101,7 @@ public class CustomerServletAPI extends HttpServlet {
                 String id = rst.getString(1);
                 String name = rst.getString(2);
                 String address = rst.getString(3);
-                String salary = rst.getString(4);
+                double salary = rst.getDouble(4);
 
                 JsonObjectBuilder customer = Json.createObjectBuilder();
 
