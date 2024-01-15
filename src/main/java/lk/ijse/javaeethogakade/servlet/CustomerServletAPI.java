@@ -1,3 +1,4 @@
+// CustomerServletAPI.java
 package lk.ijse.javaeethogakade.servlet;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -5,74 +6,57 @@ import jakarta.json.Json;
 import jakarta.json.JsonArrayBuilder;
 import jakarta.json.JsonObjectBuilder;
 import jakarta.servlet.ServletException;
-import lk.ijse.javaeethogakade.db.DBConnection;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import lk.ijse.javaeethogakade.util.SQLUtil;
+import lk.ijse.javaeethogakade.dto.CustomerDto;
 
-import java.io.*;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
-import lk.ijse.javaeethogakade.dto.CustomerDto;
-
-import javax.ws.rs.HttpMethod;
-
 @WebServlet(name = "customerServlet", value = "/customer/*")
 public class CustomerServletAPI extends HttpServlet {
-    private String message;
-
-    public void init() {
-        message = "Hello World!";
-    }
-
     @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        Connection connection = null;
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             BufferedReader reader = request.getReader();
             StringBuilder jsonInput = new StringBuilder();
 
-            String line = null;
-
+            String line;
             while ((line = reader.readLine()) != null) {
                 jsonInput.append(line);
             }
 
-
             ObjectMapper objectMapper = new ObjectMapper();
             CustomerDto customerDto = objectMapper.readValue(jsonInput.toString(), CustomerDto.class);
 
-            connection = DBConnection.getDbConnection().getConnection();
-            PreparedStatement stm = connection.prepareStatement("INSERT INTO customer (cusID, cusName, cusAddress,cusSalary) VALUES (?, ?, ?,?)");
+            String sql = "INSERT INTO customer (cusID, cusName, cusAddress, cusSalary) VALUES (?, ?, ?, ?)";
+            Boolean result = SQLUtil.execute(sql, customerDto.getId(), customerDto.getName(), customerDto.getAddress(), customerDto.getSalary());
 
-            stm.setString(1, customerDto.getId());
-            stm.setString(2, customerDto.getName());
-            stm.setString(3, customerDto.getAddress());
-            stm.setDouble(4, customerDto.getSalary());
-
-            stm.executeUpdate();
-
-            response.getWriter().println("Customer has been saved successfully");
-
-
+            if (result) {
+                response.getWriter().println("Customer has been saved successfully");
+            } else {
+                response.getWriter().println("Failed to save customer");
+            }
         } catch (SQLException | ClassNotFoundException e) {
-
+            throw new RuntimeException(e);
         }
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Connection connection = null;
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            connection = DBConnection.getDbConnection().getConnection();
+            String sql = "SELECT * FROM customer";
+            ResultSet rst = SQLUtil.execute(sql);
 
-            PreparedStatement pstm = connection.prepareStatement("select * from customer");
-            ResultSet rst = pstm.executeQuery();
-            PrintWriter writer = resp.getWriter();
-            resp.addHeader("Content-Type", "application/json");
-            resp.addHeader("Access-Control-Allow-Origin", "*");
+            PrintWriter writer = response.getWriter();
+            response.addHeader("Content-Type", "application/json");
+            response.addHeader("Access-Control-Allow-Origin", "*");
 
             JsonArrayBuilder allCustomer = Json.createArrayBuilder();
 
@@ -92,60 +76,46 @@ public class CustomerServletAPI extends HttpServlet {
                 allCustomer.add(customer.build());
             }
             writer.print(allCustomer.build());
-
         } catch (ClassNotFoundException | SQLException e) {
-            throw new RuntimeException(e);
+            throw new ServletException("Error in doGet method", e);
         }
     }
 
-
-
     @Override
-    public void doPut(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        Connection connection = null;
+    protected void doPut(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             BufferedReader reader = request.getReader();
             StringBuilder jsonInput = new StringBuilder();
 
-            String line = null;
-
+            String line;
             while ((line = reader.readLine()) != null) {
                 jsonInput.append(line);
             }
 
-
             ObjectMapper objectMapper = new ObjectMapper();
             CustomerDto customerDto = objectMapper.readValue(jsonInput.toString(), CustomerDto.class);
 
-            connection = DBConnection.getDbConnection().getConnection();
-            PreparedStatement stm = connection.prepareStatement("UPDATE customer SET cusName=?, cusAddress=?, cusSalary=? WHERE cusID=?");
+            String sql = "UPDATE customer SET cusName=?, cusAddress=?, cusSalary=? WHERE cusID=?";
+            Boolean result = SQLUtil.execute(sql, customerDto.getName(), customerDto.getAddress(), customerDto.getSalary(), customerDto.getId());
 
-            stm.setString(1, customerDto.getName());
-            stm.setString(2, customerDto.getAddress());
-            stm.setDouble(3, customerDto.getSalary());
-            stm.setString(4, customerDto.getId());
-
-            stm.executeUpdate();
-
-            response.getWriter().println("Customer has been updated successfully");
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
+            if (result) {
+                response.getWriter().println("Customer has been updated successfully");
+            } else {
+                response.getWriter().println("Failed to update customer");
+            }
+        } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
 
     @Override
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try (Connection connection = DBConnection.getDbConnection().getConnection()) {
+        try {
             String customerId = request.getPathInfo().substring(1);
+            String sql = "DELETE FROM customer WHERE cusID=?";
+            Boolean result = SQLUtil.execute(sql, customerId);
 
-            PreparedStatement stm = connection.prepareStatement("DELETE FROM customer WHERE cusID=?");
-            stm.setString(1, customerId);
-
-            int affectedRows = stm.executeUpdate();
-
-            if (affectedRows > 0) {
+            if (result) {
                 response.getWriter().println("Customer has been deleted successfully");
             } else {
                 response.getWriter().println("Customer not found or could not be deleted");
@@ -154,6 +124,4 @@ public class CustomerServletAPI extends HttpServlet {
             throw new ServletException("Error in doDelete method", e);
         }
     }
-
-
 }

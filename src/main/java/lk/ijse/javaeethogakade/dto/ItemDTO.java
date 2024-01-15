@@ -7,6 +7,8 @@ public class ItemDTO {
     private int qtyOnHand;
 
     public ItemDTO() {
+
+
     }
     public ItemDTO(String code, String description, double unitPrice, int qtyOnHand) {
         this.code = code;
