@@ -47,6 +47,10 @@ function loadCustomerIds() {
 
         const selectedValue = $(this).val();
 
+        $.ajax({
+
+        }
+
         validated1();
         validated2();
         validated3();
