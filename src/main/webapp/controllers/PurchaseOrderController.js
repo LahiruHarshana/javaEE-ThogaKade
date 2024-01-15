@@ -15,6 +15,30 @@ var Orders = [];
         itemFormVar.style.display = "none";
         orderrFormVar.style.display = "inline";
 
+
+
+
+        $ajax({
+            url:'http://localhost:8080/javaEE_Pos/cus',
+            method:'GET',
+            success:function (customer) {
+                for (let i in customer) {
+                    let cus = customer[i];
+                    let id = cus.id;
+                    let name = cus.name;
+                    let address = cus.address;
+                    let salary=cus.salary;
+                    let row=`<tr><td>${id}</td><td>${name}</td><td>${address}</td><td>${salary}</td></tr>`;
+                    $("#tblCustomer").append(row);
+                }
+            },
+            error:function (err) {
+                alert("ERROR LOAD DATA")
+            }
+        });
+
+        $("#selectCustomerId").val("");
+
     });
 
     $("#selectCustomerId").change(function () {
