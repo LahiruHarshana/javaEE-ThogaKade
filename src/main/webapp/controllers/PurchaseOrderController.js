@@ -4,11 +4,33 @@ import { validated1, validated2, validated3, validated4, validated5, validated6,
 
 var Orders = [];
 
+$(document).ready(function () {
+    loadCustomerIds();
+});
+
     $("#orderNav").click(function () {
         const customerFormVar = document.querySelector("#customerForm");
         const itemFormVar = document.querySelector("#itemForm");
         const orderrFormVar = document.querySelector("#orderForm");
-        const homeFormVar = document.querySelector("#homeeeeee")
+        const homeFormVar = document.querySelector("#homeeeeee");
+
+
+        let selectId = $("#selectCustomerId");
+        selectId.children().remove();
+
+        $ajax({
+            method: "GET",
+            url: "http://localhost:8080/pos/api/v1/customers",
+            async: true,
+            dataType: 'json',
+            success: function (resp) {
+                console.log(resp);
+                for (let i = 0; i < resp.length; i++) {
+                    let option = `<option value="${resp[i].id}">${resp[i].id}</option>`;
+                    selectId.append(option);
+                }
+            }
+        });
 
         homeFormVar.style.display='none'
         customerFormVar.style.display = "none";
@@ -18,26 +40,7 @@ var Orders = [];
 
 
 
-        $ajax({
-            url:'http://localhost:8080/javaEE_Pos/cus',
-            method:'GET',
-            success:function (customer) {
-                for (let i in customer) {
-                    let cus = customer[i];
-                    let id = cus.id;
-                    let name = cus.name;
-                    let address = cus.address;
-                    let salary=cus.salary;
-                    let row=`<tr><td>${id}</td><td>${name}</td><td>${address}</td><td>${salary}</td></tr>`;
-                    $("#tblCustomer").append(row);
-                }
-            },
-            error:function (err) {
-                alert("ERROR LOAD DATA")
-            }
-        });
 
-        $("#selectCustomerId").val("");
 
     });
 
