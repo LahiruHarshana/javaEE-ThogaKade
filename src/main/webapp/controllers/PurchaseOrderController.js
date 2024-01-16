@@ -146,7 +146,6 @@ $("#selectCustomerId").change(function () {
         var price = parseInt($("#iOPrice").val());
         var qty = parseInt($("#oqty").val());
         var total = price * qty;
-
         var itemID = $("#itemID").val();
 
 
