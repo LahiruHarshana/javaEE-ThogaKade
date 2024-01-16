@@ -123,7 +123,6 @@ $("#selectCustomerId").change(function () {
                     $("#iOQty").val(item.qty);
                 } else {
                     console.log("No item found with the specified ID");
-                    // Handle the case when no item is found
                 }
             }
         });
