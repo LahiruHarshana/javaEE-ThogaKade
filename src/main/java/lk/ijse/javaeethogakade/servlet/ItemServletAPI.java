@@ -35,7 +35,7 @@ public class ItemServletAPI extends HttpServlet {
                 resp.addHeader("Access-Control-Allow-Origin", "*");
 
 
-                JsonArrayBuilder allCustomer = Json.createArrayBuilder();
+                JsonArrayBuilder allItems = Json.createArrayBuilder();
 
                 while (rst.next()) {
                     String code = rst.getString("ItemCode");
@@ -43,16 +43,16 @@ public class ItemServletAPI extends HttpServlet {
                     double unitPrice = rst.getDouble("ItemPrice");
                     int qtyOnHand = rst.getInt("ItemQuantity");
 
-                    JsonObjectBuilder customer = Json.createObjectBuilder();
+                    JsonObjectBuilder item = Json.createObjectBuilder();
 
-                    customer.add("id", id);
-                    customer.add("name", name);
-                    customer.add("address", address);
-                    customer.add("salary", salary);
+                    item.add("code", code);
+                    item.add("description", description);
+                    item.add("unitPrice", unitPrice);
+                    item.add("qtyOnHand", qtyOnHand);
 
-                    allCustomer.add(customer.build());
+                    allItems.add(item.build());
                 }
-                writer.print(allCustomer.build());
+                writer.print(allItems.build());
             } catch (ClassNotFoundException | SQLException | IOException e) {
                 throw new RuntimeException(e);
             }
