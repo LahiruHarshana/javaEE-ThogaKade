@@ -41,7 +41,7 @@ function loadItemIds() {
         success: function (resp) {
             console.log(resp);
             for (let i = 0; i < resp.length; i++) {
-                let option = `<option value="${resp[i].id}">${resp[i].id}</option>`;
+                let option = `<option value="${resp[i].code}">${resp[i].code}</option>`;
                 selectId.append(option);
             }
         }
