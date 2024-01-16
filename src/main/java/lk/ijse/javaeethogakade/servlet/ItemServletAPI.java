@@ -57,7 +57,6 @@ public class ItemServletAPI extends HttpServlet {
                 throw new RuntimeException(e);
             }
             return;
-
         }
 
         try {
