@@ -104,8 +104,6 @@ $("#selectCustomerId").change(function () {
 
 
     $("#oSelectItem").change(function () {
-
-
         const selectedValue = $(this).val();
 
         $.ajax({
