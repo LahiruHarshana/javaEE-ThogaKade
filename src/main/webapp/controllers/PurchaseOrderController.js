@@ -121,6 +121,18 @@ $("#selectCustomerId").change(function () {
                     $("#ItemNameOrder").val(item.name);
                     $("#iOPrice").val(item.price);
                     $("#iOQty").val(item.qty);
+
+                    validated1();
+                    validated2();
+                    validated3();
+                    validated4();
+                    validated5();
+                    validated6();
+                    validated7();
+                    validated8();
+                    validated9();
+                    validated10();
+                    validated11();
                 } else {
                     console.log("No item found with the specified ID");
                 }
@@ -128,17 +140,7 @@ $("#selectCustomerId").change(function () {
         });
 
 
-        validated1();
-        validated2();
-        validated3();
-        validated4();
-        validated5();
-        validated6();
-        validated7();
-        validated8();
-        validated9();
-        validated10();
-        validated11();
+
     });
 
     $("#addToItemBtn").click(function () {
