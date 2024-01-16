@@ -34,25 +34,26 @@ public class ItemServletAPI extends HttpServlet {
                 resp.addHeader("Content-Type", "application/json");
                 resp.addHeader("Access-Control-Allow-Origin", "*");
 
-                JsonObjectBuilder item = Json.createObjectBuilder();
 
-                if (rst.next()) {
-                    String code = rst.getString(1);
-                    String description = rst.getString(2);
-                    double unitPrice = rst.getDouble(3);
-                    int qtyOnHand = rst.getInt(4);
+                JsonArrayBuilder allCustomer = Json.createArrayBuilder();
 
-                    item.add("code", code);
-                    item.add("description", description);
-                    item.add("unitPrice", unitPrice);
-                    item.add("qtyOnHand", qtyOnHand);
-                } else {
-                    resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
-                    item.add("error", "Item not found");
+                while (rst.next()) {
+                    String code = rst.getString("ItemCode");
+                    String description = rst.getString("ItemName");
+                    double unitPrice = rst.getDouble("ItemPrice");
+                    int qtyOnHand = rst.getInt("ItemQuantity");
+
+                    JsonObjectBuilder customer = Json.createObjectBuilder();
+
+                    customer.add("id", id);
+                    customer.add("name", name);
+                    customer.add("address", address);
+                    customer.add("salary", salary);
+
+                    allCustomer.add(customer.build());
                 }
-
-                writer.print(item.build());
-            } catch (SQLException | ClassNotFoundException e) {
+                writer.print(allCustomer.build());
+            } catch (ClassNotFoundException | SQLException | IOException e) {
                 throw new RuntimeException(e);
             }
             return;

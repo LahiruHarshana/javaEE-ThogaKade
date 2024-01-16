@@ -117,10 +117,10 @@ $("#selectCustomerId").change(function () {
             success: function (resp) {
                 if (Array.isArray(resp) && resp.length > 0) {
                     const item = resp[0];
-                    $("#itemID").val(item.id);
-                    $("#ItemNameOrder").val(item.name);
-                    $("#iOPrice").val(item.price);
-                    $("#iOQty").val(item.qty);
+                    $("#itemID").val(item.code);
+                    $("#ItemNameOrder").val(item.description);
+                    $("#iOPrice").val(item.unitPrice);
+                    $("#iOQty").val(item.qtyOnHand);
 
                     validated1();
                     validated2();
