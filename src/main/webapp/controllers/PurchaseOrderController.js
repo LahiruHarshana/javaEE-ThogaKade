@@ -142,7 +142,6 @@ $("#selectCustomerId").change(function () {
 
 
     });
-
     $("#addToItemBtn").click(function () {
         var price = parseInt($("#iOPrice").val());
         var qty = parseInt($("#oqty").val());
@@ -150,20 +149,6 @@ $("#selectCustomerId").change(function () {
 
         var itemID = $("#itemID").val();
 
-        if (!found) {
-            const order = {
-                orderID: $("#oId").val(),
-                date: $("#date").val(),
-                customerID: $("#CustomerIDORderForm").val(),
-                itemID: itemID,
-                itemName: $("#ItemNameOrder").val(),
-                unitPrice: $("#iOPrice").val(),
-                Qty: qty,
-                total: total
-            };
-
-            Orders.push(order);
-        }
 
         updateOrderTable();
         loadTotal();
