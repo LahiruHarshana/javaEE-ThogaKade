@@ -23,7 +23,41 @@ public class ItemServletAPI extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String pathInfo = req.getParameter("itemId");
+        String itemId = req.getParameter("itemId");
+
+        if(itemId != null){
+            try {
+                String sql = "SELECT * FROM Items WHERE ItemCode=?";
+                ResultSet rst = SQLUtil.execute(sql, itemId);
+
+                PrintWriter writer = resp.getWriter();
+                resp.addHeader("Content-Type", "application/json");
+                resp.addHeader("Access-Control-Allow-Origin", "*");
+
+                JsonObjectBuilder item = Json.createObjectBuilder();
+
+                if (rst.next()) {
+                    String code = rst.getString(1);
+                    String description = rst.getString(2);
+                    double unitPrice = rst.getDouble(3);
+                    int qtyOnHand = rst.getInt(4);
+
+                    item.add("code", code);
+                    item.add("description", description);
+                    item.add("unitPrice", unitPrice);
+                    item.add("qtyOnHand", qtyOnHand);
+                } else {
+                    resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                    item.add("error", "Item not found");
+                }
+
+                writer.print(item.build());
+            } catch (SQLException | ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+            return;
+
+        }
 
         try {
             String sql = "SELECT * FROM Items";

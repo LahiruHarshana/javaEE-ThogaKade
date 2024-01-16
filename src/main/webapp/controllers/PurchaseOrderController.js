@@ -97,7 +97,6 @@ $("#selectCustomerId").change(function () {
                 validated11();
             } else {
                 console.log("No customer found with the specified ID");
-                // Handle the case when no customer is found
             }
         }
     });
