@@ -102,7 +102,6 @@ $("#selectCustomerId").change(function () {
     });
 });
 
-
     $("#oSelectItem").change(function () {
         const selectedValue = $(this).val();
 
@@ -143,10 +142,14 @@ $("#selectCustomerId").change(function () {
 
     });
     $("#addToItemBtn").click(function () {
+
+
         var price = parseInt($("#iOPrice").val());
         var qty = parseInt($("#oqty").val());
         var total = price * qty;
         var itemID = $("#itemID").val();
+        var itemName = $("#ItemNameOrder").val();
+
 
 
         updateOrderTable();
