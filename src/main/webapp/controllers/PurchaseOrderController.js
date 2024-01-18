@@ -66,7 +66,6 @@ function loadItemIds() {
 
 $("#selectCustomerId").change(function () {
     const selectedValue = $(this).val();
-
     $.ajax({
         method: "GET",
         url: "http://localhost:8080/app/customer",
