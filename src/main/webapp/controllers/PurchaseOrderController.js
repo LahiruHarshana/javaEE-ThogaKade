@@ -47,7 +47,6 @@ function loadItemIds() {
         }
     });
 }
-
     $("#orderNav").click(function () {
         const customerFormVar = document.querySelector("#customerForm");
         const itemFormVar = document.querySelector("#itemForm");
