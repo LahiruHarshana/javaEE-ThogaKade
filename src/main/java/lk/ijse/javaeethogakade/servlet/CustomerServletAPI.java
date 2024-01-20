@@ -22,6 +22,8 @@ import java.sql.SQLException;
 public class CustomerServletAPI extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        response.addHeader("Access-Control-Allow-Origin", "*");
         try {
             BufferedReader reader = request.getReader();
             StringBuilder jsonInput = new StringBuilder();
@@ -30,7 +32,6 @@ public class CustomerServletAPI extends HttpServlet {
             while ((line = reader.readLine()) != null) {
                 jsonInput.append(line);
             }
-
             ObjectMapper objectMapper = new ObjectMapper();
             CustomerDto customerDto = objectMapper.readValue(jsonInput.toString(), CustomerDto.class);
 
@@ -46,6 +47,15 @@ public class CustomerServletAPI extends HttpServlet {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    protected void doOptions(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+        response.setHeader("Access-Control-Allow-Headers", "Content-Type");
+        response.setStatus(HttpServletResponse.SC_OK);
+    }
+
 
     private void getAll(String customerId, HttpServletResponse response) {
         try {
