@@ -22,7 +22,6 @@ import java.sql.SQLException;
 public class CustomerServletAPI extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
         response.addHeader("Access-Control-Allow-Origin", "*");
         try {
             BufferedReader reader = request.getReader();
