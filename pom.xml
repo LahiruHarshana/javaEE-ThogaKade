@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example</groupId>
-    <artifactId>javaEE-Thogakade</artifactId>
+    <artifactId>javaEE-Thogakade-BackEnd</artifactId>
     <version>1.0.0</version>
     <name>javaEE-Thogakade</name>
     <packaging>war</packaging>
